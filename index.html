@@ -1,0 +1,2343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crawler Algebra</title>
+<meta name="description" content="Algebra practice with a dungeon crawler twist. Private family game.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1b1830">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Crawler Algebra">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACvElEQVR42u3dzW3CQBCAUVhRBBJS7rlxoAdKSBHUkyJSAj1wzz2V5JBTJH5sM4vXs++7RiIIP83YBJz1brtfSdcqXgLBITgEh+AQHIJDcAgOZW9T9dG/v968xLV7//ip9MjrGm+fM5FDSSQOJpIpicGBRUoihYysPX9cChl8xK8VLNKvmEKGERI5OUb9pnpX4ap9LEbjGPhsmGhTyajjEv8OKRYznlXErvsSy5OMxk88R+kZsVbuPy4WC9oyAw9WIaPDETJwfpTaz0PNrpgYHN7V6PPqpszOU80Oj0IGH9Nx2CndbpYyC0ktYnj4gLGm4rBTet4sEyeHndLDZrFWdLONl+Bw/rz1o8vx5JxDgkNwCA7BITgEh+AQHIJDcEhwCA7BITgEh+AQHIJDcAgOCQ7BITgUmy819f7NJZNDcAgOwSE4BIdcyk7JzaWuNvvtk0wOwSE4BIfgEByCQ3AIDsEhOCQ4BIfgEByCQ23VxId9/FMwk0NwCA7BITgkOASH4BAcgkNwCA7BITjUX+7P0W7uzyFrRXAIDsEhOCQ4BIfgEByCQ3AIDsEhOASH9C/355DJITgEh+AQHIJDLmWX1uH8eetHl+PJ5JDgEByCQ3AIDsEhOASH4BAcEhyCQ3AIDsEhOASH4BAcgkOCQ3AIDsXmS029f3PJ5NALcfjHW8tq2vF6gMMNmXJ3//haK6qAw2bJvVMG4bBZ+twpz64VwyPx2Ag45+Ajq4yhOGyWDndKzNWK4ZFybIzAcR8aH8uSMXAVrHfbfSBGC6j9gTH8GI1bKw8f1whJI2NV46+yf8/PCFncGcaza2XC86CkHRNjj8UUHNZH1mvXmEtZ8yC9jOmTwwjJzeKpyWGEpJexCnmHlI+UMgLWihWTkkU8DkpymKiLg5JFm3gRDi06HzAWHIJDcAgOwSE4BIey9AvdpLhfEM9ApgAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACvElEQVR42u3dzW3CQBCAUVhRBBJS7rlxoAdKSBHUkyJSAj1wzz2V5JBTJH5sM4vXs++7RiIIP83YBJz1brtfSdcqXgLBITgEh+AQHIJDcAgOZW9T9dG/v968xLV7//ip9MjrGm+fM5FDSSQOJpIpicGBRUoihYysPX9cChl8xK8VLNKvmEKGERI5OUb9pnpX4ap9LEbjGPhsmGhTyajjEv8OKRYznlXErvsSy5OMxk88R+kZsVbuPy4WC9oyAw9WIaPDETJwfpTaz0PNrpgYHN7V6PPqpszOU80Oj0IGH9Nx2CndbpYyC0ktYnj4gLGm4rBTet4sEyeHndLDZrFWdLONl+Bw/rz1o8vx5JxDgkNwCA7BITgEh+AQHIJDcEhwCA7BITgEh+AQHIJDcAgOCQ7BITgUmy819f7NJZNDcAgOwSE4BIdcyk7JzaWuNvvtk0wOwSE4BIfgEByCQ3AIDsEhOCQ4BIfgEByCQ23VxId9/FMwk0NwCA7BITgkOASH4BAcgkNwCA7BITjUX+7P0W7uzyFrRXAIDsEhOCQ4BIfgEByCQ3AIDsEhOASH9C/355DJITgEh+AQHIJDLmWX1uH8eetHl+PJ5JDgEByCQ3AIDsEhOASH4BAcEhyCQ3AIDsEhOASH4BAcgkOCQ3AIDsXmS029f3PJ5NALcfjHW8tq2vF6gMMNmXJ3//haK6qAw2bJvVMG4bBZ+twpz64VwyPx2Ag45+Ajq4yhOGyWDndKzNWK4ZFybIzAcR8aH8uSMXAVrHfbfSBGC6j9gTH8GI1bKw8f1whJI2NV46+yf8/PCFncGcaza2XC86CkHRNjj8UUHNZH1mvXmEtZ8yC9jOmTwwjJzeKpyWGEpJexCnmHlI+UMgLWihWTkkU8DkpymKiLg5JFm3gRDi06HzAWHIJDcAgOwSE4BIey9AvdpLhfEM9ApgAAAABJRU5ErkJggg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1b1830; --bg2: #231f3d; --panel: #2b2649; --panel2: #332d57;
+  --ink: #ede6d6; --muted: #aaa3c2; --line: #4a4370;
+  --gold: #f2c14e; --gold-ink: #1b1830; --gold-soft: rgba(242, 193, 78, .12);
+  --teal: #4fd1c5; --teal-soft: rgba(79, 209, 197, .13);
+  --rose: #ef5d84; --rose-soft: rgba(239, 93, 132, .14);
+  --sky: #8ab4ff; --sky-soft: rgba(138, 180, 255, .12);
+  --paper: #242040; --key: #342e58; --key-hi: #413a6c;
+  --display: "Chakra Petch", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #ebe8f3; --bg2: #e1ddee; --panel: #ffffff; --panel2: #f4f2fa;
+    --ink: #221d3a; --muted: #5d5779; --line: #c6c0da;
+    --gold: #8a5a00; --gold-ink: #fff8e6; --gold-soft: rgba(176, 120, 0, .1);
+    --teal: #0b7a70; --teal-soft: rgba(11, 122, 112, .1);
+    --rose: #b8284f; --rose-soft: rgba(184, 40, 79, .09);
+    --sky: #2f5fc4; --sky-soft: rgba(47, 95, 196, .09);
+    --paper: #fbfaff; --key: #ffffff; --key-hi: #ece9f6;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #ebe8f3; --bg2: #e1ddee; --panel: #ffffff; --panel2: #f4f2fa;
+  --ink: #221d3a; --muted: #5d5779; --line: #c6c0da;
+  --gold: #8a5a00; --gold-ink: #fff8e6; --gold-soft: rgba(176, 120, 0, .1);
+  --teal: #0b7a70; --teal-soft: rgba(11, 122, 112, .1);
+  --rose: #b8284f; --rose-soft: rgba(184, 40, 79, .09);
+  --sky: #2f5fc4; --sky-soft: rgba(47, 95, 196, .09);
+  --paper: #fbfaff; --key: #ffffff; --key-hi: #ece9f6;
+  color-scheme: light;
+}
+:root[data-theme="dark"] { color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { scroll-padding: 96px 0 300px; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 17px; line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+img, svg { max-width: 100%; }
+[hidden] { display: none !important; }
+
+.wrap { max-width: 520px; margin: 0 auto; padding: 14px 14px 24px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; letter-spacing: .01em; }
+h1 { font-size: 30px; font-weight: 700; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 17px; font-weight: 600; }
+p { margin: 0 0 10px; }
+.muted { color: var(--muted); }
+.small { font-size: 14px; }
+
+/* ---------- System message: the signature element ---------- */
+.sys {
+  position: relative; margin: 12px 0;
+  padding: 12px 14px 12px 16px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 3px, var(--gold-soft) 3px 4px),
+    var(--panel);
+  border: 2px solid var(--gold);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+.sys::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--gold);
+}
+.sys-title { font-family: var(--display); font-weight: 700; color: var(--gold); font-size: 19px; margin-bottom: 4px; }
+.sys p { margin: 0; }
+.sys.alert { border-color: var(--rose); }
+.sys.alert::before { background: var(--rose); }
+.sys.alert .sys-title { color: var(--rose); }
+
+.say { display: flex; gap: 8px; align-items: baseline; margin: 6px 2px 10px; font-size: 15px; }
+.say b { font-family: var(--display); font-weight: 600; color: var(--sky); white-space: nowrap; }
+.say span { color: var(--muted); }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 46px; padding: 10px 16px; border-radius: 10px;
+  border: 2px solid var(--line); background: var(--panel2); font-weight: 700;
+  transition: transform .06s ease, background .15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); font-family: var(--display); font-size: 18px; }
+.btn.teal { background: var(--teal); border-color: var(--teal); color: var(--gold-ink); }
+.btn.ghost { background: transparent; }
+.btn.block { width: 100%; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.linkish { background: none; border: 0; color: var(--muted); text-decoration: underline; padding: 8px; }
+
+/* ---------- create + hub ---------- */
+.title-card { padding: 22px 4px 6px; }
+.title-card h1 { font-size: 34px; }
+.field { display: block; margin: 14px 0; }
+.field > span { display: block; font-weight: 700; margin-bottom: 6px; }
+.text-in {
+  width: 100%; min-height: 48px; padding: 10px 12px; border-radius: 10px;
+  border: 2px solid var(--line); background: var(--paper);
+}
+.classes { display: grid; gap: 8px; }
+.class-opt {
+  text-align: left; padding: 12px 14px; border-radius: 10px;
+  border: 2px solid var(--line); background: var(--panel);
+}
+.class-opt strong { font-family: var(--display); font-size: 18px; display: block; }
+.class-opt[aria-pressed="true"] { border-color: var(--gold); background: var(--gold-soft); }
+
+.crawler-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; padding-top: 8px; }
+.crawler-head .lvl { font-family: var(--display); font-size: 42px; font-weight: 700; color: var(--gold); line-height: 1; }
+.bar { height: 10px; border-radius: 6px; background: var(--bg2); overflow: hidden; border: 1px solid var(--line); }
+.bar > i { display: block; height: 100%; background: var(--gold); transition: width .4s ease; }
+.bar.hp > i { background: var(--teal); }
+.bar.hp.low > i { background: var(--rose); }
+.stat-line { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+.floor-card {
+  margin: 14px 0 10px; padding: 16px; border-radius: 14px;
+  background: var(--panel); border: 2px solid var(--line);
+}
+.floor-card.locked { opacity: .55; border-style: dashed; }
+.floor-card h2 { margin-bottom: 2px; }
+.floor-card .btn { margin-top: 12px; }
+.hub-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+
+/* ---------- run HUD ---------- */
+.hud {
+  position: sticky; top: 0; z-index: 5;
+  background: var(--bg); padding: 10px 14px 8px; border-bottom: 1px solid var(--line);
+}
+.hud-in { max-width: 520px; margin: 0 auto; }
+.hud-row { display: flex; align-items: center; gap: 10px; }
+.hud .hpwrap { flex: 1; }
+.hud .hpnum { font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; }
+.hud .timer { font-family: var(--display); font-weight: 700; font-size: 22px; min-width: 70px; text-align: right; font-variant-numeric: tabular-nums; }
+.hud .timer.warn { color: var(--rose); }
+.hud .fans { font-size: 13px; color: var(--muted); text-align: right; min-width: 64px; }
+.hud .fans b { display: block; color: var(--ink); font-size: 16px; }
+.hud-row2 { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; gap: 8px; }
+.pips { display: flex; gap: 5px; align-items: center; }
+.pip { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); }
+.pip.done { background: var(--teal); border-color: var(--teal); }
+.pip.now { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-soft); }
+.pip.side { border-radius: 3px; transform: rotate(45deg) scale(.85); }
+.pip.boss { width: 18px; height: 18px; border-radius: 4px; }
+.pip.skip { opacity: .3; }
+.bag { display: flex; gap: 5px; }
+.bag button {
+  border: 1px solid var(--line); background: var(--panel); border-radius: 999px;
+  padding: 3px 9px; font-size: 13px; min-height: 30px;
+}
+.quit { font-size: 13px; }
+
+.boss-bar { margin: 8px 0 2px; }
+.boss-bar .stat-line { color: var(--rose); font-weight: 700; }
+.boss-bar .bar > i { background: var(--rose); }
+.shake { animation: shake .35s ease; }
+@keyframes shake { 20% { transform: translateX(-5px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(3px); } }
+
+/* ---------- work board (mirrors the center-line method on paper) ---------- */
+.board {
+  background: var(--paper); border: 2px solid var(--line); border-radius: 14px;
+  padding: 10px 8px 12px; margin-top: 6px;
+}
+.row { display: grid; grid-template-columns: 1fr 26px 1fr; align-items: center; }
+.row > .l { text-align: right; padding-right: 8px; }
+.row > .r { text-align: left; padding-left: 8px; }
+.row > .mid { align-self: stretch; display: flex; justify-content: center; align-items: center; position: relative; }
+.row > .mid::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: var(--line); }
+.row > .mid b { position: relative; background: var(--paper); font-size: 20px; line-height: 1; padding: 2px 0; font-weight: 400; }
+.eqrow { min-height: 44px; font-size: 21px; }
+.eqrow.start { font-size: 22px; padding-bottom: 6px; border-bottom: 2px dashed var(--line); margin-bottom: 4px; }
+.oprow { font-size: 16px; color: var(--sky); min-height: 30px; }
+.oprow .l, .oprow .r { border-bottom: 2px solid var(--sky); padding-bottom: 2px; }
+.oprow.empty .l, .oprow.empty .r { border-bottom: 0; }
+.eqrow.final .l, .eqrow.final .r { color: var(--teal); font-weight: 700; }
+
+.entry { margin-top: 6px; }
+.entry .row { margin: 4px 0; }
+.cell {
+  width: 100%; min-height: 46px; border-radius: 9px; padding: 8px 10px;
+  border: 2px solid var(--line); background: var(--bg2);
+  font-size: 19px; font-variant-numeric: tabular-nums;
+}
+.cell::placeholder { color: var(--muted); opacity: .75; font-size: 14px; }
+.cell.op { min-height: 40px; font-size: 16px; color: var(--sky); border-style: dashed; }
+.cell.active { border-color: var(--gold); background: var(--panel); }
+.cell.bad { border-color: var(--rose); }
+.row .l .cell { text-align: right; }
+.preview { min-height: 34px; margin: 6px 4px 0; font-size: 15px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.preview .m { color: var(--ink); font-size: 19px; }
+
+.actions { display: grid; grid-template-columns: 1.4fr 1fr; gap: 8px; margin-top: 10px; }
+.actions .wide { grid-column: 1 / -1; }
+.declare { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.declare .btn { min-height: 40px; font-size: 14px; padding: 6px 8px; border-style: dashed; }
+
+.fb { margin-top: 10px; padding: 10px 12px; border-radius: 10px; border-left: 5px solid var(--line); background: var(--panel); font-size: 15.5px; }
+.fb:empty { display: none; }
+.fb.ok { border-color: var(--teal); background: var(--teal-soft); }
+.fb.bad { border-color: var(--rose); background: var(--rose-soft); }
+.fb.hint { border-color: var(--sky); background: var(--sky-soft); }
+.fb.info { border-color: var(--gold); background: var(--gold-soft); }
+.fb .who { font-family: var(--display); font-weight: 700; }
+.fb p { margin: 0 0 4px; }
+.fb p:last-child { margin: 0; }
+
+/* math rendering */
+.m { white-space: nowrap; display: inline-flex; align-items: center; flex-wrap: nowrap; }
+.m i { font-family: "Times New Roman", Georgia, serif; font-size: 1.12em; padding: 0 1px; }
+.m .bin { padding: 0 .28em; }
+.fr { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; font-size: .78em; margin: 0 2px; line-height: 1.05; }
+.fr > span { padding: 0 2px; }
+.fr > .fn { border-bottom: 1.5px solid currentColor; }
+.mp { font-size: 1.15em; padding: 0 1px; }
+
+/* ---------- keypad ---------- */
+.pad {
+  position: sticky; bottom: 0; z-index: 6;
+  background: var(--bg2); border-top: 1px solid var(--line);
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+}
+.pad-grid { max-width: 520px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.key {
+  min-height: 46px; border-radius: 9px; border: 1px solid var(--line);
+  background: var(--key); font-size: 21px; font-weight: 700;
+  touch-action: manipulation; user-select: none; -webkit-user-select: none;
+}
+.key:active { background: var(--key-hi); }
+.key.fn { font-size: 15px; font-weight: 700; color: var(--muted); }
+.key.var { font-family: "Times New Roman", Georgia, serif; font-style: italic; color: var(--gold); font-size: 25px; }
+.key.opk { color: var(--sky); }
+.key.go { grid-column: span 2; background: var(--gold); color: var(--gold-ink); border-color: var(--gold); font-family: var(--display); font-size: 17px; }
+.key .fr { font-size: 14px; }
+
+/* ---------- modal + toasts ---------- */
+.modal { position: fixed; inset: 0; z-index: 20; background: rgba(10, 8, 22, .72); display: flex; align-items: flex-end; justify-content: center; }
+.modal-card {
+  width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto;
+  background: var(--bg); border-top: 3px solid var(--gold); border-radius: 18px 18px 0 0;
+  padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
+  animation: rise .22s ease;
+}
+@media (min-width: 560px) { .modal { align-items: center; } .modal-card { border-radius: 18px; border: 3px solid var(--gold); } }
+@keyframes rise { from { transform: translateY(30px); opacity: 0; } }
+.modal-card .btn + .btn { margin-top: 8px; }
+
+.loot-box {
+  margin: 18px auto 10px; width: 150px; height: 150px; display: grid; place-items: center;
+  border-radius: 18px; border: 4px solid currentColor; font-family: var(--display);
+  font-size: 22px; font-weight: 700; text-align: center; padding: 10px; background: var(--panel);
+}
+.loot-box.closed { animation: wobble 1.1s ease-in-out infinite; cursor: pointer; }
+@keyframes wobble { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-4deg); } 75% { transform: rotate(4deg); } }
+.loot-box.pop { animation: pop .35s ease; }
+@keyframes pop { 50% { transform: scale(1.12); } }
+.t-bronze { color: #c98a55; } .t-silver { color: #b9c3d6; } .t-gold { color: var(--gold); } .t-legendary { color: #d38bff; }
+:root[data-theme="light"] .t-silver { color: #6b7a93; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .t-silver { color: #6b7a93; } :root:not([data-theme="dark"]) .t-bronze { color: #9a5a22; } :root:not([data-theme="dark"]) .t-legendary { color: #8a2fc2; } }
+.item { padding: 10px 12px; border-radius: 10px; background: var(--panel); border: 2px solid var(--line); margin: 8px 0; }
+.item h3 { margin-bottom: 2px; }
+.item .tier { font-size: 13px; font-weight: 700; }
+
+.toasts { position: fixed; top: 10px; left: 0; right: 0; z-index: 30; display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: none; padding: 0 10px; }
+.toast {
+  max-width: 480px; width: 100%; background: var(--panel); border: 2px solid var(--gold);
+  border-radius: 12px; padding: 10px 14px; animation: drop .25s ease; box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+}
+.toast b { font-family: var(--display); color: var(--gold); display: block; }
+@keyframes drop { from { transform: translateY(-16px); opacity: 0; } }
+
+.worked { margin: 10px 0; }
+.worked .why { font-size: 14px; color: var(--muted); margin: 8px 0 2px; }
+.worked .board { margin-top: 4px; }
+
+/* lists / tabs / parent */
+.tabs { display: flex; gap: 6px; margin: 12px 0; }
+.tabs button { flex: 1; min-height: 42px; border-radius: 10px; border: 2px solid var(--line); background: var(--panel); font-weight: 700; }
+.tabs button[aria-selected="true"] { border-color: var(--gold); color: var(--gold); }
+.ach { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.ach .mark { width: 26px; height: 26px; flex: none; border-radius: 6px; border: 2px solid var(--line); display: grid; place-items: center; font-weight: 700; }
+.ach.got .mark { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+.ach:not(.got) { opacity: .55; }
+.kv { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 10px 0; }
+.kv div { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+.kv b { display: block; font-family: var(--display); font-size: 24px; }
+.kv span { font-size: 13px; color: var(--muted); }
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 7px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 700; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.toggle { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.toggle input { width: 24px; height: 24px; accent-color: var(--gold); }
+.section { margin-top: 22px; }
+textarea.text-in { min-height: 90px; font-size: 12px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { min-width: 40px; min-height: 40px; border-radius: 9px; border: 2px solid var(--line); background: var(--panel); font-family: "Times New Roman", Georgia, serif; font-style: italic; font-size: 20px; }
+.chip[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+.logrow { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.logeq { font-size: 18px; overflow-x: auto; padding-bottom: 2px; }
+.toast span { display: block; font-size: 14px; }
+
+</style>
+</head>
+<body>
+<div id="app">
+  <section id="scr-create" class="wrap" hidden></section>
+  <section id="scr-hub" class="wrap" hidden></section>
+  <section id="scr-run" hidden>
+    <header class="hud" id="hud"></header>
+    <div class="wrap" id="run-body"></div>
+  </section>
+  <section id="scr-hwin" class="wrap" hidden></section>
+  <section id="scr-recap" class="wrap" hidden></section>
+  <section id="scr-bag" class="wrap" hidden></section>
+  <section id="scr-parent" class="wrap" hidden></section>
+  <footer class="pad" id="pad" hidden><div class="pad-grid"></div></footer>
+</div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<div id="modal-root"></div>
+<noscript><p style="padding:20px">This game needs JavaScript turned on.</p></noscript>
+<script>
+/* ============================================================
+   MATH ENGINE — exact fractions, parsing, step checking,
+   mistake detection, hints, worked-example solver, generators.
+   Skill packs register here so new units can be added later.
+   ============================================================ */
+const Engine = (() => {
+
+class MathErr extends Error {}
+
+// ---------- exact fractions ----------
+const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a; };
+const lcm = (a, b) => (a / gcd(a, b)) * b;
+class Q {
+  constructor(n, d = 1) {
+    if (d === 0) throw new MathErr("You can't divide by zero. Not even in the dungeon.");
+    if (d < 0) { n = -n; d = -d; }
+    const g = gcd(n, d) || 1;
+    this.n = n / g + 0; this.d = d / g;
+    if (!Number.isSafeInteger(this.n) || !Number.isSafeInteger(this.d)) throw new MathErr('Those numbers got too big.');
+  }
+  add(o) { return new Q(this.n * o.d + o.n * this.d, this.d * o.d); }
+  sub(o) { return new Q(this.n * o.d - o.n * this.d, this.d * o.d); }
+  mul(o) { return new Q(this.n * o.n, this.d * o.d); }
+  div(o) { if (o.n === 0) throw new MathErr("You can't divide by zero. Not even in the dungeon."); return new Q(this.n * o.d, this.d * o.n); }
+  neg() { return new Q(-this.n, this.d); }
+  abs() { return new Q(Math.abs(this.n), this.d); }
+  isZero() { return this.n === 0; }
+  isInt() { return this.d === 1; }
+  eq(o) { return this.n === o.n && this.d === o.d; }
+  cmp(o) { return this.n * o.d - o.n * this.d; }
+  sign() { return Math.sign(this.n); }
+  toString() { return this.d === 1 ? String(this.n) : this.n + '/' + this.d; }
+}
+const Q0 = new Q(0), Q1 = new Q(1), QM1 = new Q(-1);
+const q = (n, d = 1) => new Q(n, d);
+
+function parseDec(t) {
+  if (!t.includes('.')) return new Q(parseInt(t, 10));
+  const [a, b = ''] = t.split('.');
+  const den = Math.pow(10, b.length);
+  return new Q(parseInt((a || '0') + b, 10), den);
+}
+
+// ---------- linear expressions {v:{name:Q}, k:Q} ----------
+const Lin = {
+  c: (x) => ({ v: {}, k: x }),
+  x: (name, co = Q1) => (co.isZero() ? { v: {}, k: Q0 } : { v: { [name]: co }, k: Q0 }),
+  add(a, b) {
+    const v = { ...a.v };
+    for (const n in b.v) { const s = v[n] ? v[n].add(b.v[n]) : b.v[n]; if (s.isZero()) delete v[n]; else v[n] = s; }
+    return { v, k: a.k.add(b.k) };
+  },
+  scale(a, f) {
+    if (f.isZero()) return { v: {}, k: Q0 };
+    const v = {}; for (const n in a.v) v[n] = a.v[n].mul(f);
+    return { v, k: a.k.mul(f) };
+  },
+  neg: (a) => Lin.scale(a, QM1),
+  sub: (a, b) => Lin.add(a, Lin.neg(b)),
+  isConst: (a) => Object.keys(a.v).length === 0,
+  coef: (a, n) => a.v[n] || Q0,
+  vars: (a) => Object.keys(a.v),
+  eq(a, b) {
+    if (!a.k.eq(b.k)) return false;
+    const ka = Object.keys(a.v), kb = Object.keys(b.v);
+    return ka.length === kb.length && ka.every((n) => b.v[n] && b.v[n].eq(a.v[n]));
+  },
+  varPart: (a) => ({ v: { ...a.v }, k: Q0 }),
+  constPart: (a) => ({ v: {}, k: a.k }),
+  sum: (list) => list.reduce((s, t) => Lin.add(s, t), Lin.c(Q0)),
+  dens(a) { const d = [a.k.d]; for (const n in a.v) d.push(a.v[n].d); return d; },
+};
+
+// ---------- tokenizer + parser ----------
+function normalize(s) {
+  return String(s).replace(/[−–—]/g, '-').replace(/[×·]/g, '*').replace(/÷/g, '/').replace(/[\[{]/g, '(').replace(/[\]}]/g, ')');
+}
+function tokenize(str) {
+  const s = normalize(str).replace(/\s+/g, '');
+  const toks = []; let i = 0;
+  while (i < s.length) {
+    const ch = s[i];
+    if (/[0-9.]/.test(ch)) {
+      let j = i; while (j < s.length && /[0-9.]/.test(s[j])) j++;
+      const t = s.slice(i, j);
+      if (!/^(\d+(\.\d*)?|\.\d+)$/.test(t)) throw new MathErr(`"${t}" isn't a number the System recognizes.`);
+      toks.push({ t: 'num', v: parseDec(t), raw: t }); i = j;
+    } else if (/[a-zA-Z]/.test(ch)) { toks.push({ t: 'var', v: ch.toLowerCase() }); i++; }
+    else if ('+-*/()'.includes(ch)) { toks.push({ t: ch }); i++; }
+    else if (ch === '=') throw new MathErr('Each box holds one side. Leave the = sign out.');
+    else throw new MathErr(`The System doesn't understand "${ch}".`);
+  }
+  return toks;
+}
+function parseExpr(str) {
+  const toks = tokenize(str);
+  if (!toks.length) throw new MathErr('This box is empty.');
+  let p = 0;
+  const peek = () => toks[p];
+  const next = () => toks[p++];
+  const sym = (t) => (t.t === 'num' ? t.raw : t.t === 'var' ? t.v : t.t);
+  function expr() {
+    let node = term();
+    while (peek() && (peek().t === '+' || peek().t === '-')) {
+      const op = next().t; const r = term();
+      node = { t: op === '+' ? 'add' : 'sub', a: node, b: r };
+    }
+    return node;
+  }
+  function term() {
+    let node = unary();
+    while (peek()) {
+      const t = peek().t;
+      if (t === '*' || t === '/') { next(); node = { t: t === '*' ? 'mul' : 'div', a: node, b: unary(), explicit: true }; }
+      else if (t === 'num' || t === 'var' || t === '(') node = { t: 'mul', a: node, b: primary() };
+      else break;
+    }
+    return node;
+  }
+  function unary() {
+    const t = peek();
+    if (!t) throw new MathErr('Something is missing at the end.');
+    if (t.t === '-') { next(); return { t: 'neg', a: unary() }; }
+    if (t.t === '+') { next(); return unary(); }
+    return primary();
+  }
+  function primary() {
+    const t = next();
+    if (!t) throw new MathErr('Something is missing at the end.');
+    if (t.t === 'num') return { t: 'num', v: t.v, raw: t.raw };
+    if (t.t === 'var') return { t: 'var', n: t.v };
+    if (t.t === '(') {
+      if (peek() && peek().t === ')') throw new MathErr('Empty parentheses ( ) — something goes inside.');
+      const e = expr(); const c = next();
+      if (!c || c.t !== ')') throw new MathErr('Missing a closing parenthesis ).');
+      return { t: 'grp', a: e };
+    }
+    throw new MathErr(`"${sym(t)}" is in a weird spot.`);
+  }
+  const tree = expr();
+  if (p < toks.length) throw new MathErr(`"${sym(toks[p])}" is in a weird spot.`);
+  return tree;
+}
+
+// ---------- evaluation (normal + faulty "common mistake" modes) ----------
+function flatTerms(n, mode) {
+  if (n.t === 'add') return [...flatTerms(n.a, mode), ...flatTerms(n.b, mode)];
+  if (n.t === 'sub') return [...flatTerms(n.a, mode), ...flatTerms(n.b, mode).map(Lin.neg)];
+  return [eva(n, mode)];
+}
+function negFirstOnly(g, mode) {
+  const t = flatTerms(g.a, mode);
+  return Lin.sum([Lin.neg(t[0]), ...t.slice(1)]);
+}
+function eva(n, mode = null) {
+  switch (n.t) {
+    case 'num': return Lin.c(n.v);
+    case 'var': return Lin.x(n.n);
+    case 'grp': return eva(n.a, mode);
+    case 'neg':
+      if (mode === 'minusFirst' && n.a.t === 'grp') return negFirstOnly(n.a, mode);
+      return Lin.neg(eva(n.a, mode));
+    case 'add': return Lin.add(eva(n.a, mode), eva(n.b, mode));
+    case 'sub':
+      if (mode === 'minusFirst' && n.b.t === 'grp') return Lin.add(eva(n.a, mode), negFirstOnly(n.b, mode));
+      return Lin.sub(eva(n.a, mode), eva(n.b, mode));
+    case 'mul': {
+      const A = eva(n.a, mode), B = eva(n.b, mode);
+      if (!Lin.isConst(A) && !Lin.isConst(B)) throw new MathErr('This floor only has straight-line equations — no variable times variable.');
+      if (mode === 'firstOnly' || mode === 'signSlip') {
+        const g = n.b.t === 'grp' ? n.b : n.a.t === 'grp' ? n.a : null;
+        const other = g === n.b ? A : B;
+        if (g && Lin.isConst(other)) {
+          const k = other.k; const terms = flatTerms(g.a, mode);
+          if (terms.length > 1 && !(mode === 'signSlip' && k.sign() >= 0)) {
+            const k2 = mode === 'firstOnly' ? Q1 : k.abs();
+            return Lin.sum([Lin.scale(terms[0], k), ...terms.slice(1).map((t) => Lin.scale(t, k2))]);
+          }
+        }
+      }
+      return Lin.isConst(A) ? Lin.scale(B, A.k) : Lin.scale(A, B.k);
+    }
+    case 'div': {
+      const A = eva(n.a, mode), B = eva(n.b, mode);
+      if (!Lin.isConst(B)) throw new MathErr("You can't divide by a variable on this floor.");
+      if (B.k.isZero()) throw new MathErr("You can't divide by zero. Not even in the dungeon.");
+      return Lin.scale(A, Q1.div(B.k));
+    }
+  }
+  throw new MathErr('Unknown expression.');
+}
+
+// expand parentheses but keep terms separate (for worked examples)
+function expandTerms(n) {
+  switch (n.t) {
+    case 'num': return [Lin.c(n.v)];
+    case 'var': return [Lin.x(n.n)];
+    case 'grp': return expandTerms(n.a);
+    case 'neg': return expandTerms(n.a).map(Lin.neg);
+    case 'add': return [...expandTerms(n.a), ...expandTerms(n.b)];
+    case 'sub': return [...expandTerms(n.a), ...expandTerms(n.b).map(Lin.neg)];
+    case 'mul': {
+      const A = expandTerms(n.a), B = expandTerms(n.b);
+      const Av = Lin.sum(A), Bv = Lin.sum(B);
+      if (Lin.isConst(Av)) return B.map((t) => Lin.scale(t, Av.k));
+      if (Lin.isConst(Bv)) return A.map((t) => Lin.scale(t, Bv.k));
+      throw new MathErr('nonlinear');
+    }
+    case 'div': { const Bv = eva(n.b); return expandTerms(n.a).map((t) => Lin.scale(t, Q1.div(Bv.k))); }
+  }
+  return [];
+}
+
+// ---------- AST inspection ----------
+const hasGrp = (n) => !!n && (n.t === 'grp' || ['add', 'sub', 'mul', 'div'].includes(n.t) && (hasGrp(n.a) || hasGrp(n.b)) || n.t === 'neg' && hasGrp(n.a));
+function grpMultiplier(n) { // describe first distribution found
+  if (!n) return null;
+  if (n.t === 'mul') {
+    const g = n.b.t === 'grp' ? n.b : n.a.t === 'grp' ? n.a : null;
+    if (g) { const o = g === n.b ? n.a : n.b; try { const v = eva(o); if (Lin.isConst(v)) return fmtQ(v.k); } catch (e) {} }
+  }
+  if (n.t === 'sub' && n.b.t === 'grp') return 'minus';
+  if (n.t === 'neg' && n.a.t === 'grp') return 'minus';
+  for (const c of [n.a, n.b]) if (c && typeof c === 'object') { const r = grpMultiplier(c); if (r) return r; }
+  return null;
+}
+function needsCombine(n) {
+  if (hasGrp(n)) return false;
+  const terms = flatTerms(n);
+  let consts = 0; const vars = {};
+  for (const t of terms) {
+    if (Lin.isConst(t)) consts++;
+    else for (const k of Lin.vars(t)) vars[k] = (vars[k] || 0) + 1;
+    if (Lin.vars(t).length > 1) return true;
+  }
+  return consts > 1 || Object.values(vars).some((c) => c > 1);
+}
+function varsIn(n, set = new Set()) {
+  if (!n) return set;
+  if (n.t === 'var') set.add(n.n);
+  if (n.a) varsIn(n.a, set); if (n.b) varsIn(n.b, set);
+  return set;
+}
+const hasFracCoef = (lin) => Lin.dens(lin).some((d) => d > 1);
+
+// ---------- formatting ----------
+const fmtQ = (x) => x.toString();
+function fmtTermLin(t, first) {
+  const names = Lin.vars(t);
+  let c, body;
+  if (names.length) { c = t.v[names[0]]; body = names[0]; } else { c = t.k; body = ''; }
+  const negative = c.sign() < 0; const a = c.abs();
+  let s;
+  if (body) s = (a.eq(Q1) ? '' : fmtQ(a)) + body; else s = fmtQ(a);
+  if (first) return (negative ? '-' : '') + s;
+  return (negative ? ' - ' : ' + ') + s;
+}
+function fmtTerms(list) {
+  const nz = list.filter((t) => !(Lin.isConst(t) && t.k.isZero()));
+  if (!nz.length) return '0';
+  return nz.map((t, i) => fmtTermLin(t, i === 0)).join('');
+}
+function splitLin(lin, order = 'varFirst') {
+  const parts = [];
+  for (const n of Lin.vars(lin)) parts.push(Lin.x(n, lin.v[n]));
+  const c = Lin.c(lin.k);
+  if (order === 'constFirst') parts.unshift(c); else parts.push(c);
+  return parts;
+}
+const fmtLin = (lin, order) => fmtTerms(splitLin(lin, order));
+function fmtAddend(lin) { // "+ 4n" / "- 5"
+  const s = fmtTerms(splitLin(lin));
+  return s.startsWith('-') ? '− ' + s.slice(1).replace(/ - /g, ' − ') : '+ ' + s.replace(/ - /g, ' − ');
+}
+const pretty = (s) => s.replace(/-/g, '−');
+
+// ---------- operations under each side ----------
+function parseOp(raw) {
+  const r = String(raw || '').trim();
+  if (!r) return null;
+  const s = normalize(r).replace(/\s+/g, '');
+  const lead = s[0];
+  if (lead === '+' || lead === '-') {
+    if (/[×÷*]/.test(r)) throw new MathErr('One kind of move per step: add/subtract OR multiply/divide. Split this into two steps.');
+    const val = eva(parseExpr(s));
+    if (Lin.isConst(val) && val.k.isZero()) throw new MathErr('Adding zero does nothing. The crowd is bored.');
+    return { type: 'add', val, raw: r };
+  }
+  if (lead === '*' || lead === '/') {
+    const rest = s.slice(1);
+    if (!rest) throw new MathErr(`Put a number after the ${lead === '*' ? '×' : '÷'}.`);
+    const ast = parseExpr(rest);
+    const isCoef = (n) => n.t === 'num' || n.t === 'neg' && isCoef(n.a) || n.t === 'div' && isCoef(n.a) && isCoef(n.b) || n.t === 'grp' && isCoef(n.a);
+    if (!isCoef(ast)) {
+      const v = (() => { try { return eva(ast); } catch (e) { return null; } })();
+      if (v && !Lin.isConst(v)) throw new MathErr('This floor only lets you multiply or divide both sides by a number, not a variable.');
+      throw new MathErr(`Just one number after the ${lead === '*' ? '×' : '÷'}. If you need more moves, use more steps.`);
+    }
+    const v = eva(ast).k;
+    if (v.isZero()) throw new MathErr(lead === '*' ? 'Multiplying by zero deletes the whole equation. Nice try.' : "You can't divide by zero. Not even in the dungeon.");
+    return { type: 'mul', f: lead === '*' ? v : Q1.div(v), shown: v, lead, raw: r };
+  }
+  throw new MathErr('Start the move with +, −, ×, or ÷.');
+}
+function applyOp(lin, op) {
+  if (!op) return lin;
+  return op.type === 'add' ? Lin.add(lin, op.val) : Lin.scale(lin, op.f);
+}
+function sameOp(a, b) {
+  if (a.type !== b.type) return false;
+  return a.type === 'add' ? Lin.eq(a.val, b.val) : a.f.eq(b.f);
+}
+
+// ---------- equation state ----------
+function makeState(Lraw, Rraw) {
+  const Last = parseExpr(Lraw), Rast = parseExpr(Rraw);
+  return { Lraw: String(Lraw), Rraw: String(Rraw), Last, Rast, Lv: eva(Last), Rv: eva(Rast) };
+}
+function solveSet(Lv, Rv) {
+  const d = Lin.sub(Lv, Rv); const vs = Lin.vars(d);
+  if (!vs.length) return d.k.isZero() ? { kind: 'all' } : { kind: 'none' };
+  if (vs.length > 1) return { kind: 'multi' };
+  return { kind: 'one', v: vs[0], val: d.k.neg().div(d.v[vs[0]]) };
+}
+const squash = (s) => normalize(s).replace(/\s+/g, '').toLowerCase();
+function simpleNumber(raw) { // -> {ok, lowest}
+  const s = squash(raw);
+  if (/^-?\d+$/.test(s)) return { ok: true, lowest: true };
+  if (/^-?(\d+\.\d*|\.\d+)$/.test(s)) return { ok: true, lowest: true, decimal: true };
+  const m = s.match(/^-?(\d+)\/(\d+)$/);
+  if (m) { const a = +m[1], b = +m[2]; return { ok: true, lowest: b > 1 && gcd(a, b) === 1 }; }
+  return { ok: false };
+}
+
+// ---------- mistake diagnosis ----------
+const MSG = {
+  oneSide: 'You only wrote a move under one side. Whatever you do to the left, you do to the right.',
+  mismatch: "Your two moves don't match. Both sides get the exact same move.",
+  forgotOp: 'You wrote the move but the {side} side looks like you never applied it.',
+  signOp: 'Sign check on the {side} side: it looks like you went the opposite direction of the move you wrote.',
+  invertedOp: 'On the {side} side you multiplied when you meant to divide (or the other way around).',
+  partialMul: "On the {side} side you only hit part of it. When you multiply or divide a side, every term gets hit.",
+  signMul: 'Sign check on the {side} side: multiplying or dividing by a negative flips every sign.',
+  firstOnly: 'Distribution miss on the {side} side: the number outside the parentheses multiplies every term inside, not just the first one.',
+  signSlip: 'Sign slip on the {side} side: when you distribute a negative, negative × negative = positive.',
+  minusFirst: 'On the {side} side, the minus in front of the parentheses flips the sign of every term inside, not just the first.',
+  unlike: "On the {side} side you merged unlike terms. {v}-terms and plain numbers can't combine.",
+  constOff: 'Your {v}-term on the {side} side is right. Recheck the plain numbers.',
+  varOff: 'The plain numbers on the {side} side are right. Recheck the {v}-terms.',
+  bothOff: 'The {side} side is off in both the {v}-terms and the numbers. Slow down and redo that side.',
+  valueChanged: "With no move written, each side has to stay worth the same thing. The {side} side changed.",
+  repeatDec: "That fraction doesn't turn into a clean decimal. Leave it as a fraction.",
+};
+const fill = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k] ?? '');
+
+function diagnoseSide(P, Pv, op, G, E, v, rawG) {
+  const eq = (x) => Lin.eq(G, x);
+  if (op) {
+    if (eq(Pv) && !Lin.eq(Pv, E)) return 'forgotOp';
+    if (op.type === 'add' && eq(Lin.sub(Pv, op.val))) return 'signOp';
+    if (op.type === 'mul') {
+      if (eq(Lin.scale(Pv, Q1.div(op.f)))) return 'invertedOp';
+      const vp = Lin.varPart(Pv), cp = Lin.constPart(Pv);
+      if (!Lin.isConst(Pv) && !Pv.k.isZero() && (eq(Lin.add(Lin.scale(vp, op.f), cp)) || eq(Lin.add(vp, Lin.scale(cp, op.f))))) return 'partialMul';
+      if (eq(Lin.scale(Pv, op.f.neg()))) return 'signMul';
+    }
+  }
+  if (P && hasGrp(P)) {
+    for (const mode of ['firstOnly', 'signSlip', 'minusFirst']) {
+      try {
+        const F = eva(P, mode);
+        if (!Lin.eq(F, Pv) && eq(applyOp(F, op))) return mode;
+      } catch (e) {}
+    }
+  }
+  if (rawG && /\./.test(rawG) && E.k.d > 1) {
+    let d = E.k.d; while (d % 2 === 0) d /= 2; while (d % 5 === 0) d /= 5;
+    if (d > 1) return 'repeatDec';
+  }
+  const a = Lin.coef(E, v), b = E.k;
+  if (!a.isZero() && !b.isZero()) {
+    const s = a.add(b);
+    if (eq(Lin.c(s)) || eq(Lin.x(v, s))) return 'unlike';
+  }
+  const vpOk = Lin.eq(Lin.varPart(G), Lin.varPart(E));
+  const cpOk = G.k.eq(E.k);
+  if (vpOk && !cpOk) return 'constOff';
+  if (!vpOk && cpOk) return 'varOff';
+  return op ? 'bothOff' : 'valueChanged';
+}
+
+// ---------- the step checker ----------
+// prev: state; input: {opL, opR, resL, resR}; v: variable
+function checkStep(prev, input, v) {
+  const out = { ok: false };
+  let opL, opR;
+  try { opL = parseOp(input.opL); } catch (e) { return { kind: 'error', where: 'opL', msg: e.message }; }
+  try { opR = parseOp(input.opR); } catch (e) { return { kind: 'error', where: 'opR', msg: e.message }; }
+  for (const [op, where] of [[opL, 'opL'], [opR, 'opR']]) {
+    if (op && op.type === 'add') { const bad = Lin.vars(op.val).find((n) => n !== v); if (bad) return { kind: 'error', where, msg: `There's no "${bad}" in this fight. The variable is ${v}.` }; }
+  }
+  if (!String(input.resL || '').trim() || !String(input.resR || '').trim())
+    return { kind: 'error', where: !String(input.resL || '').trim() ? 'resL' : 'resR', msg: 'Fill in both result boxes.' };
+  let GL, GR, GLast, GRast;
+  try { GLast = parseExpr(input.resL); GL = eva(GLast); } catch (e) { return { kind: 'error', where: 'resL', msg: e.message }; }
+  try { GRast = parseExpr(input.resR); GR = eva(GRast); } catch (e) { return { kind: 'error', where: 'resR', msg: e.message }; }
+  for (const [G, where] of [[GL, 'resL'], [GR, 'resR']]) {
+    const bad = [...varsIn(where === 'resL' ? GLast : GRast)].find((n) => n !== v);
+    if (bad) return { kind: 'error', where, msg: `There's no "${bad}" in this fight. The variable is ${v}.` };
+  }
+  if ((opL && !opR) || (!opL && opR)) return { kind: 'mistake', code: 'oneSide', msg: MSG.oneSide, where: opL ? 'opR' : 'opL' };
+  if (opL && opR && !sameOp(opL, opR)) return { kind: 'mistake', code: 'mismatch', msg: MSG.mismatch, where: 'opR' };
+  const op = opL;
+  const EL = applyOp(prev.Lv, op), ER = applyOp(prev.Rv, op);
+  let okL = Lin.eq(GL, EL), okR = Lin.eq(GR, ER), swapped = false;
+  if (!(okL && okR) && Lin.eq(GL, ER) && Lin.eq(GR, EL)) { okL = okR = true; swapped = true; }
+
+  const nTerms = (lin) => splitLin(lin).filter((t) => !(Lin.isConst(t) && t.k.isZero())).length;
+  const bigSimplify = (P, G, Gast) => hasGrp(P) && !hasGrp(Gast) && !needsCombine(Gast) && expandTerms(P).length > nTerms(G);
+  const combo = !!(op && op.type === 'add' && !Lin.isConst(op.val) && !op.val.k.isZero())
+    || !!(op && (hasGrp(prev.Last) || hasGrp(prev.Rast)))
+    || (!op && (bigSimplify(prev.Last, GL, GLast) || bigSimplify(prev.Rast, GR, GRast)));
+  const expNeedsCombine = (P) => { if (!hasGrp(P)) return false; const ts = expandTerms(P); let c = 0, x = 0; for (const t of ts) { if (Lin.isConst(t)) c++; else x++; } return c > 1 || x > 1; };
+  const comboTry = !!(op && op.type === 'add' && !Lin.isConst(op.val) && !op.val.k.isZero())
+    || !!(op && (hasGrp(prev.Last) || hasGrp(prev.Rast)))
+    || (!op && ((!okL && expNeedsCombine(prev.Last) && !hasGrp(GLast)) || (!okR && expNeedsCombine(prev.Rast) && !hasGrp(GRast))));
+
+  if (!(okL && okR)) {
+    const sides = [];
+    if (!okL) sides.push(['left', prev.Last, prev.Lv, GL, EL, input.resL]);
+    if (!okR) sides.push(['right', prev.Rast, prev.Rv, GR, ER, input.resR]);
+    const [side, P, Pv, G, E, raw] = sides[0];
+    const code = diagnoseSide(P, Pv, op, G, E, v, raw);
+    let msg = fill(MSG[code], { side, v });
+    if (sides.length === 2) msg += ' (The right side needs another look too.)';
+    const fracs = hasFracCoef(E) || hasFracCoef(Pv);
+    return { kind: 'mistake', code, msg, fracs, combo: comboTry, where: side === 'left' ? 'resL' : 'resR' };
+  }
+  const next = { Lraw: input.resL, Rraw: input.resR, Last: GLast, Rast: GRast, Lv: GL, Rv: GR };
+  if (!op && squash(input.resL) === squash(prev.Lraw) && squash(input.resR) === squash(prev.Rraw))
+    return { kind: 'stall', msg: 'Nothing changed. Make a move!' };
+
+  const flags = { combo, swapped };
+  if (hasGrp(prev.Last) || hasGrp(prev.Rast)) if (!hasGrp(GLast) && !hasGrp(GRast)) flags.distributed = true;
+  if (op && op.type === 'mul' && (hasFracCoef(prev.Lv) || hasFracCoef(prev.Rv)) && !hasFracCoef(GL) && !hasFracCoef(GR)) flags.cleared = true;
+  if (/\./.test(input.resL + input.resR)) flags.decimal = true;
+  flags.wroteOp = !!op;
+  const res = { kind: 'ok', next, flags, op };
+  // solved?
+  const status = statusOf(next, v);
+  Object.assign(res, status);
+  return res;
+}
+function statusOf(st, v) {
+  const lc = Lin.isConst(st.Lv), rc = Lin.isConst(st.Rv);
+  if (lc && rc) return { status: 'declare' };
+  const L = squash(st.Lraw), R = squash(st.Rraw);
+  for (const [vs, cs] of [[L, R], [R, L]]) {
+    if (vs === v) {
+      const sn = simpleNumber(cs);
+      if (sn.ok && sn.lowest) return { status: 'solved' };
+      const other = vs === L ? st.Rv : st.Lv;
+      if (Lin.isConst(other)) return { status: 'simplify' };
+    }
+  }
+  return { status: 'open' };
+}
+
+// ---------- hints / next move ----------
+function nextMove(st, v) {
+  const gl = hasGrp(st.Last), gr = hasGrp(st.Rast);
+  if (gl || gr) return { kind: 'distribute', side: gl && gr ? 'both' : gl ? 'left' : 'right', mult: grpMultiplier(gl ? st.Last : st.Rast) };
+  const cl = needsCombine(st.Last), cr = needsCombine(st.Rast);
+  if (cl || cr) return { kind: 'combine', side: cl && cr ? 'both' : cl ? 'left' : 'right' };
+  const Lc = Lin.coef(st.Lv, v), Rc = Lin.coef(st.Rv, v);
+  if (Lc.isZero() && Rc.isZero()) return { kind: 'declare' };
+  const stat = statusOf(st, v);
+  if (stat.status === 'solved') return { kind: 'done' };
+  if (stat.status === 'simplify') return { kind: 'simplifyAnswer' };
+  if (!Lc.isZero() && Lc.eq(Rc)) { const val = Lin.x(v, Lc.neg()); return { kind: 'moveVar', op: { type: 'add', val }, text: fmtAddend(val) }; }
+  const L = lcmAll([...Lin.dens(st.Lv), ...Lin.dens(st.Rv)]);
+  if (L > 1) return { kind: 'clear', op: { type: 'mul', f: q(L), shown: q(L), lead: '*' }, text: '× ' + L };
+  if (!Lc.isZero() && !Rc.isZero()) {
+    const elim = Lc.cmp(Rc) <= 0 ? Lc : Rc;
+    const val = Lin.x(v, elim.neg());
+    return { kind: 'moveVar', op: { type: 'add', val }, text: fmtAddend(val) };
+  }
+  const left = !Lc.isZero();
+  const vs = left ? st.Lv : st.Rv;
+  if (!vs.k.isZero()) { const val = Lin.c(vs.k.neg()); return { kind: 'moveConst', side: left ? 'left' : 'right', op: { type: 'add', val }, text: fmtAddend(val) }; }
+  const co = left ? Lc : Rc;
+  if (!co.eq(Q1)) return { kind: 'divide', op: { type: 'mul', f: Q1.div(co), shown: co, lead: '/' }, text: '÷ ' + fmtQ(co), coef: co };
+  return { kind: 'tidy', side: left ? 'left' : 'right' };
+}
+const lcmAll = (arr) => arr.reduce((a, b) => lcm(a, b), 1);
+
+function hintText(m, level, v) {
+  const S = (s) => (s === 'both' ? 'both sides' : `the ${s} side`);
+  const t = {
+    distribute: [
+      'Something is trapped in parentheses. Deal with that first.',
+      'Distribute: the number outside multiplies every term inside. Watch the signs. This is a simplify step, so leave the move boxes empty.',
+      m.mult === 'minus'
+        ? `On ${S(m.side)}, the minus in front of the parentheses flips every sign inside. Leave the move boxes empty and write the result.`
+        : `Distribute the ${pretty(m.mult || '')} on ${S(m.side)}. Leave the move boxes empty and write what you get.`,
+    ],
+    combine: [
+      'Some terms on the same side can team up.',
+      `Combine like terms: ${v}-terms together, plain numbers together. It's a simplify step, so leave the move boxes empty.`,
+      `Combine like terms on ${S(m.side)}. Leave the move boxes empty.`,
+    ],
+    clear: [
+      'Fractions are slowing you down. There is a way to make them vanish.',
+      'Clear the fractions: multiply both sides by a number every denominator divides into (the LCD).',
+      `Write ${pretty(m.text || '')} under both sides. Every term gets multiplied.`,
+    ],
+    moveVar: [
+      `There are ${v}-terms on both sides. That's one side too many.`,
+      `Get all the ${v}-terms on one side by adding or subtracting a ${v}-term from both sides.`,
+      `Write ${pretty(m.text || '')} under both sides.`,
+    ],
+    moveConst: [
+      `The ${v} side still has a plain number hanging around.`,
+      `Undo the plain number on the ${v} side by doing the opposite to both sides.`,
+      `Write ${pretty(m.text || '')} under both sides.`,
+    ],
+    divide: [
+      `${v} is being multiplied by something. Free it.`,
+      `Undo the multiplication: divide both sides by the number stuck to ${v}.`,
+      `Write ${pretty(m.text || '')} under both sides.`,
+    ],
+    declare: [
+      `The ${v}'s are gone. That's not a mistake, it's a clue.`,
+      'Look at what is left. Is it a true statement or a false one?',
+      'True (like 5 = 5) means All real numbers. False (like 3 = 7) means No solution. Tap the matching button.',
+    ],
+    simplifyAnswer: [
+      'So close. The answer is not in simplest form yet.',
+      'Reduce the fraction, or finish the arithmetic, on the number side.',
+      `Rewrite it as ${v} = (a single number in lowest terms). Leave the move boxes empty.`,
+    ],
+    tidy: [
+      `Clean up the ${v} side so it's just ${v}.`,
+      `Rewrite so one side is only ${v}. Leave the move boxes empty.`,
+      `Write ${v} by itself on the ${m.side} side and the number on the other.`,
+    ],
+    done: ['You already did it. Look at your last line.', 'Seriously. Look.', 'It says the answer.'],
+  }[m.kind];
+  return t[Math.min(level, 2)];
+}
+
+// ---------- worked-example solver ----------
+function solveSteps(Lraw, Rraw, v) {
+  let st = makeState(Lraw, Rraw);
+  const steps = [];
+  const push = (op, L, R, why) => {
+    const ns = makeState(L, R);
+    steps.push({ op, L, R, why });
+    st = ns;
+  };
+  for (let guard = 0; guard < 12; guard++) {
+    const m = nextMove(st, v);
+    if (m.kind === 'distribute') {
+      const L = hasGrp(st.Last) ? fmtTerms(expandTerms(st.Last)) : st.Lraw;
+      const R = hasGrp(st.Rast) ? fmtTerms(expandTerms(st.Rast)) : st.Rraw;
+      push(null, L, R, m.mult === 'minus' ? 'Distribute the minus sign: it flips every sign inside.' : `Distribute: multiply every term inside the parentheses.`);
+    } else if (m.kind === 'combine') {
+      push(null, needsCombine(st.Last) ? fmtLin(st.Lv) : st.Lraw, needsCombine(st.Rast) ? fmtLin(st.Rv) : st.Rraw, 'Combine like terms on each side.');
+    } else if (['clear', 'moveVar', 'moveConst', 'divide'].includes(m.kind)) {
+      const nL = applyOp(st.Lv, m.op), nR = applyOp(st.Rv, m.op);
+      const why = { clear: 'Multiply both sides by the LCD to clear the fractions.', moveVar: `Get the ${v}-terms onto one side.`, moveConst: `Move the plain number off the ${v} side.`, divide: `Divide both sides by the number stuck to ${v}.` }[m.kind];
+      push(m.text, fmtLin(nL), fmtLin(nR), why);
+    } else if (m.kind === 'declare') {
+      const k = solveSet(st.Lv, st.Rv).kind;
+      steps.push({ declare: k, why: k === 'all' ? 'Both sides match. Every number works: All real numbers.' : "Those numbers aren't equal. Nothing works: No solution." });
+      break;
+    } else if (m.kind === 'simplifyAnswer' || m.kind === 'tidy') {
+      const left = !Lin.isConst(st.Lv);
+      push(null, left ? v : fmtLin(st.Lv), left ? fmtLin(st.Rv) : v, 'Clean up the final answer.');
+    } else break;
+  }
+  return steps;
+}
+
+// ---------- random helpers ----------
+const ri = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const nz = (a, b) => { let x = 0; while (x === 0) x = ri(a, b); return x; };
+const shuffle = (arr) => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = ri(0, i); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const VARS = ['x', 'n', 'p', 'a', 'k', 'r', 'm', 'v', 'b', 'y', 't', 'w'];
+const T = (v, c) => Lin.x(v, c instanceof Q ? c : q(c));
+const C = (c) => Lin.c(c instanceof Q ? c : q(c));
+const fracQ = (dens = [2, 3, 4, 6], maxN = 12) => { const d = pick(dens); return q(nz(-maxN, maxN), d); };
+const properish = (x, maxAbsN = 150, maxD = 36) => Math.abs(x.n) <= maxAbsN && x.d <= maxD;
+const grpStr = (terms) => `(${fmtTerms(terms)})`;
+const kStr = (k) => (k.eq(QM1) ? '-' : fmtQ(k));
+
+function build(fn, tries = 400) {
+  for (let i = 0; i < tries; i++) {
+    try {
+      const r = fn();
+      if (!r) continue;
+      const st = makeState(r.L, r.R);
+      const sol = solveSet(st.Lv, st.Rv);
+      if (r.want === 'one' && sol.kind !== 'one') continue;
+      if (r.want === 'special' && sol.kind === 'one') continue;
+      const allDens = [...Lin.dens(st.Lv), ...Lin.dens(st.Rv)];
+      if (lcmAll(allDens) > 72) continue;
+      return { L: r.L, R: r.R, v: r.v, sol, steps: solveSteps(r.L, r.R, r.v).length };
+    } catch (e) { continue; }
+  }
+  return null;
+}
+
+// ---------- generators for Floor 1 (Section 1.3 — variables on both sides) ----------
+const GEN = {
+  standard(level = 1) {
+    return build(() => {
+      const v = pick(VARS), s = ri(-10, 10);
+      const a1 = nz(-12, 12); let a2 = nz(-12, 12); if (a2 === a1) return null;
+      const b1 = nz(-20, 20);
+      const b2 = a1 * s + b1 - a2 * s;
+      if (Math.abs(b2) > 60) return null;
+      let R = [T(v, a2)];
+      if (Math.random() < 0.45 && b2 !== 0) { const c1 = nz(-9, 9), c2 = b2 - c1; if (c2 === 0) return null; R.push(C(c1), C(c2)); }
+      else if (b2 !== 0) R.push(C(b2));
+      const Lt = shuffle([T(v, a1), C(b1)]);
+      R = Math.random() < 0.5 ? shuffle(R) : R;
+      return { L: fmtTerms(Lt), R: fmtTerms(R), v, want: 'one' };
+    });
+  },
+  fraction() {
+    return build(() => {
+      const v = pick(VARS);
+      const a1 = fracQ([2, 3, 4, 6], 23), a2 = fracQ([2, 3, 4, 6], 9);
+      const c = Math.random() < 0.5 ? pick([Q1, QM1]) : fracQ([2, 3], 5);
+      const s = Math.random() < 0.6 ? q(ri(-6, 6)) : q(nz(-5, 5), pick([2, 3]));
+      const b1 = Math.random() < 0.3 ? q(nz(-9, 9)) : fracQ([2, 3, 4, 5, 6], 11);
+      const tot = a1.add(c);
+      if (tot.eq(a2)) return null;
+      const b2 = tot.sub(a2).mul(s).add(b1);
+      if (b2.isZero() || !properish(b2, 120, 36)) return null;
+      const L = fmtTerms([T(v, a1), C(b1), T(v, c)]);
+      const R = fmtTerms(Math.random() < 0.5 ? [C(b2), T(v, a2)] : [T(v, a2), C(b2)]);
+      return { L, R, v, want: 'one' };
+    });
+  },
+  distribution() {
+    const tpl = pick(['t1', 't2', 't3', 't4', 't5']);
+    return build(() => {
+      const v = pick(VARS), s = ri(-10, 10);
+      const inner = (a, b) => (Math.random() < 0.5 ? [T(v, a), C(b)] : [C(b), T(v, a)]);
+      const k = q(nz(-9, 9)); if (k.abs().eq(Q1)) return null;
+      if (tpl === 't1') { // k(v + b) = e + d v
+        const a = Math.random() < 0.6 ? 1 : nz(-4, 4), b = nz(-12, 12), d = nz(-9, 9);
+        if (k.n * a === d) return null;
+        const e = k.n * (a * s + b) - d * s; if (e === 0 || Math.abs(e) > 150) return null;
+        return { L: `${kStr(k)}${grpStr([T(v, a), C(b)])}`, R: fmtTerms(shuffle([C(e), T(v, d)])), v, want: 'one' };
+      }
+      if (tpl === 't2') { // c v + k(a v + b) = e + d v
+        const c = nz(-9, 9), a = nz(-6, 6), b = nz(-10, 10), d = nz(-9, 9);
+        if (c + k.n * a === d) return null;
+        const e = c * s + k.n * (a * s + b) - d * s; if (e === 0 || Math.abs(e) > 150) return null;
+        return { L: `${fmtTerms([T(v, c)])} ${k.sign() < 0 ? '-' : '+'} ${fmtQ(k.abs())}${grpStr(inner(a, b))}`, R: fmtTerms([C(e), T(v, d)]), v, want: 'one' };
+      }
+      if (tpl === 't3') { // c v + e = k(b + a v) + f
+        const c = nz(-12, 12), e = nz(-50, 50), a = nz(-8, 8), b = nz(-9, 9);
+        if (c === k.n * a) return null;
+        const f = c * s + e - k.n * (b + a * s); if (f === 0 || Math.abs(f) > 60) return null;
+        return { L: fmtTerms([T(v, c), C(e)]), R: `${kStr(k)}${grpStr(inner(a, b))} ${f < 0 ? '-' : '+'} ${Math.abs(f)}`, v, want: 'one' };
+      }
+      if (tpl === 't4') { // e + c v = d v - (b + a v)
+        const c = nz(-9, 9), d = nz(-6, 6), a = nz(-9, 9), b = nz(-9, 9);
+        if (c === d - a) return null;
+        const e = d * s - (b + a * s) - c * s; if (e === 0 || Math.abs(e) > 80) return null;
+        return { L: fmtTerms([C(e), T(v, c)]), R: `${fmtTerms([T(v, d)])} - ${grpStr(inner(a, b))}`, v, want: 'one' };
+      }
+      // t5: k1(v + b1) = e + k2(b2 + a2 v)
+      const k2 = q(nz(-9, 9)); if (k2.abs().eq(Q1)) return null;
+      const b1 = nz(-9, 9), b2 = nz(-12, 12), a2 = nz(-5, 5);
+      if (k.n === k2.n * a2) return null;
+      const e = k.n * (s + b1) - k2.n * (b2 + a2 * s); if (e === 0 || Math.abs(e) > 60) return null;
+      return { L: `${kStr(k)}${grpStr([T(v, 1), C(b1)])}`, R: `${e} ${k2.sign() < 0 ? '-' : '+'} ${fmtQ(k2.abs())}${grpStr(inner(a2, b2))}`, v, want: 'one' };
+    });
+  },
+  double() {
+    const tpl = pick(['d1', 'd2']);
+    return build(() => {
+      const v = pick(VARS);
+      const k = q(nz(-5, 5), pick([2, 3, 4])); if (k.isInt()) return null;
+      const a = q(nz(-5, 5), pick([2, 3, 4, 5])); if (a.isInt()) return null;
+      const b = Math.random() < 0.6 ? q(nz(-6, 6)) : fracQ([2, 3], 5);
+      const c = fracQ([2, 3, 4, 6], 9);
+      if (k.mul(a).eq(c)) return null;
+      const s = Math.random() < 0.55 ? q(nz(-6, 6)) : q(nz(-5, 5), pick([2, 3]));
+      const e = k.mul(a.mul(s).add(b)).sub(c.mul(s));
+      if (e.isZero() || !properish(e, 90, 36)) return null;
+      const side1 = `${kStr(k)}${grpStr([T(v, a), C(b)])}`;
+      if (tpl === 'd1') return { L: side1, R: fmtTerms([T(v, c), C(e)]), v, want: 'one' };
+      return { L: fmtTerms([C(e), T(v, c)]), R: side1, v, want: 'one' };
+    });
+  },
+  special(allowUnique = true) {
+    if (allowUnique && Math.random() < 0.25) return pick([GEN.standard, GEN.distribution])();
+    const tpl = pick(['s1', 's2', 's3']);
+    const same = Math.random() < 0.5;
+    return build(() => {
+      const v = pick(VARS);
+      if (tpl === 's1') { // fraction constants, same var coef
+        const den = pick([[2, 5], [3, 4], [2, 3], [4, 5]]);
+        const f1 = q(nz(1, 9), den[0]), f2 = q(nz(1, 9), den[1]), g1 = q(nz(1, 9), den[0]), g2 = q(nz(1, 20), den[1]);
+        const target = f1.sub(f2);
+        let g3 = g2.sub(g1).sub(target);
+        if (!same) g3 = g3.add(q(nz(-3, 3), den[1]));
+        if (g3.isZero() || !properish(g3, 40, 20)) return null;
+        const co = pick([1, 1, 2, -1]);
+        return { L: fmtTerms([T(v, co), C(f1), C(f2.neg())]), R: fmtTerms([C(g1.neg()), T(v, co), C(g2), C(g3.neg())]), v, want: 'special' };
+      }
+      if (tpl === 's2') { // k1(b1 + a1 v) + c1 v = k2(b2 + a2 v) + e
+        const k1 = nz(-12, 12), a1 = nz(-9, 9), b1 = nz(-12, 12), k2 = nz(-9, 9), a2 = nz(-12, 12), b2 = nz(-9, 9);
+        if (Math.abs(k1) < 2 || Math.abs(k2) < 2) return null;
+        const c1 = k2 * a2 - k1 * a1; if (c1 === 0 || Math.abs(c1) > 12) return null;
+        let e = k1 * b1 - k2 * b2; if (!same) e += nz(-9, 9);
+        if (e === 0 || Math.abs(e) > 80) return null;
+        return { L: `${k1}${grpStr([C(b1), T(v, a1)])} ${c1 < 0 ? '-' : '+'} ${fmtTerms([T(v, Math.abs(c1))])}`, R: `${k2}${grpStr([C(b2), T(v, a2)])} ${e < 0 ? '-' : '+'} ${Math.abs(e)}`, v, want: 'special' };
+      }
+      // s3: a v + b + c v = (a+c) v + d1 + d2
+      const a = nz(-9, 9), c = nz(-9, 9); if (a + c === 0) return null;
+      const b = nz(-15, 15); let d = b; if (!same) d += nz(-6, 6);
+      const d1 = nz(-9, 9), d2 = d - d1; if (d2 === 0) return null;
+      return { L: fmtTerms([T(v, a), C(b), T(v, c)]), R: fmtTerms(shuffle([T(v, a + c), C(d1), C(d2)])), v, want: 'special' };
+    });
+  },
+};
+GEN.boss = () => pick([GEN.double, () => { let p = null; for (let i = 0; i < 40; i++) { p = GEN.distribution(); if (p && p.steps >= 5) break; } return p; }, () => GEN.special(false)])();
+
+function classify(Lraw, Rraw) {
+  const st = makeState(Lraw, Rraw);
+  const k = solveSet(st.Lv, st.Rv).kind;
+  if (k === 'all' || k === 'none') return 'special';
+  const g = hasGrp(st.Last) || hasGrp(st.Rast);
+  const f = [...Lin.dens(eva(st.Last)), ...Lin.dens(eva(st.Rast))].some((d) => d > 1) || /\//.test(Lraw + Rraw);
+  return g && f ? 'double' : g ? 'distribution' : f ? 'fraction' : 'standard';
+}
+
+// ---------- verification (plug the answer back in) ----------
+function evalAt(lin, v, val) { return Lin.coef(lin, v).mul(val).add(lin.k); }
+function parseNumber(raw) {
+  const v = eva(parseExpr(raw));
+  if (!Lin.isConst(v)) throw new MathErr('Just a number here.');
+  return v.k;
+}
+
+return {
+  MathErr, Q, q, Lin, parseExpr, eva, makeState, solveSet, checkStep, statusOf, nextMove, hintText,
+  solveSteps, GEN, classify, fmtQ, fmtLin, pretty, varsIn, hasGrp, evalAt, parseNumber, squash, simpleNumber, parseOp,
+};
+})();
+
+
+/* ============================================================
+   CONTENT — all original writing, in the spirit of the books.
+   {!word} marks a swear (bleeped when the parent toggle is on).
+   ============================================================ */
+const TXT = {
+  floor1: {
+    name: 'Floor 1: The Balancing Depths',
+    unit: 'Section 1.3 · Variables on both sides',
+  },
+  roomNames: {
+    standard: 'The Scale Trap Corridor',
+    fraction: 'The Pie Vault',
+    distribution: 'The Bracket Cages',
+    double: 'The Nested Nightmare',
+    special: 'The Hall of Maybe',
+    boss: 'Boss Arena',
+    homework: 'Homework Hollow',
+  },
+  roomIntro: {
+    standard: [
+      "The floor tiles in this hallway are wired to a giant balance scale. Tip it and the ceiling drops. Our lawyers call this educational.",
+      "This corridor contains one algebraic kobold and zero sympathy. Keep both sides equal, {name}.",
+      "Every step in here is on a pressure plate. Do the same thing to both sides or become a pancake. A flat, disappointing pancake.",
+      "A kobold with a calculator blocks the path. The calculator is broken. The kobold doesn't know. Neither do the viewers.",
+    ],
+    fraction: [
+      "Every monster in the Pie Vault was sliced into pieces and none of them agree on a denominator. Delightful.",
+      "Fractions detected. The System recommends a common denominator or crying. Both are valid. Only one works.",
+      "A Fraction Rat blocks the door. It has twenty-three sixths of a tail. Nobody knows how. Nobody wants to know.",
+      "Warning: this vault smells like pie and bad decisions. Multiply carefully.",
+    ],
+    distribution: [
+      "Something nasty is locked inside parentheses. Distribute carefully. The signs bite.",
+      "A Parenthesis Goblin guards this room. It is supposed to multiply everything it touches. It gets lazy on the second term. Don't be the goblin.",
+      "Negative numbers outside the brackets. The last crawler who forgot to flip a sign is now a decorative rug.",
+      "The Bracket Cages. Break the brackets, free the terms, try not to lose any minus signs on the way out.",
+    ],
+    double: [
+      "Fractions inside parentheses. The design team called this a bit much and shipped it anyway.",
+      "Double trouble, {name}. Distribute first, then make those fractions vanish. Or don't. The audience loves a disaster.",
+      "This room was built by someone who hates you personally. The System had nothing to do with it. Allegedly.",
+    ],
+    special: [
+      "Some monsters in here have one answer. Some have every answer. Some have none. The System won't say which. That's the fun part. For us.",
+      "Mirrors everywhere. If your variables vanish, don't panic. Read what's left and make the call.",
+      "The Hall of Maybe. Maybe it has a solution. Maybe it doesn't. Maybe you should do the math and find out.",
+    ],
+    homework: [
+      "A wild homework problem appears. It escaped from a worksheet and it's angry about it.",
+      "You brought your own monster. Bold. The System respects a crawler who brings snacks.",
+      "Real-world monster detected. The System will check every step. The System will not do it for you. The System is not your servant. Donut disagrees.",
+    ],
+  },
+  bosses: [
+    'Equilibrius, the Unbalanced',
+    'Lord Denominator',
+    'The Distributor, Mother of Brackets',
+    'Negative Nancy, Sign Flipper Supreme',
+    'Remainder Rex',
+    'The Variable Hydra',
+    'Count Coefficient',
+  ],
+  bossIntro: [
+    "Boss battle! {boss} has entered the arena. It is large. It is angry. It is, frankly, poorly balanced. Fix that.",
+    "{boss} is here and the viewer count just tripled. Nobody is rooting for you. That's a lie. Some of them are. Like four.",
+    "Floor boss detected: {boss}. Every correct step does damage. Every wrong step does damage to you. Fair is fair.",
+  ],
+  sideQuests: [
+    { name: 'Mongo Ate the Key', who: 'Mongo', text: "Mongo swallowed the key to a treasure chest. Again. The only way to get it back is an equation, for reasons the System refuses to explain." },
+    { name: 'Fan Mail Emergency', who: 'Donut', text: "Princess Donut's fan mail is locked in a sponsor chest. The lock is an equation. She is being very patient about it. She is not being patient about it." },
+    { name: "Carl's Blast Radius", who: 'Carl', text: "Carl found a crate of explosives with a combination lock. He needs the exact number. Close enough is how you lose your eyebrows." },
+    { name: 'Guild Pop Quiz', who: 'Mordecai', text: "Mordecai won't open the supply closet until you prove you actually learned something. He's already pouring himself a drink." },
+  ],
+  banter: [
+    ['Donut', "Carl, the math one is doing math again. Everyone be quiet, this is very dramatic."],
+    ['Donut', "{name}, if you get this right I'll mention you on my show. Briefly. Near the end."],
+    ['Donut', "I don't do fractions. I have people for that. You're the people."],
+    ['Donut', "Mongo, stop licking the equation. It's not a snack. Well. It's not YOUR snack."],
+    ['Donut', "My fans are watching, {name}. Do it with style."],
+    ['Carl', "Same thing to both sides. You've got this."],
+    ['Carl', "I blow stuff up. You do the math. That's the deal."],
+    ['Carl', "One step at a time. Rushing is how you lose a foot down here."],
+    ['Carl', "Don't let Donut rush you. She thinks everything is a talent show."],
+    ['Carl', "Write down every move. Future you will thank you. Future me will too."],
+    ['Mongo', "Mongo screeches. It might be encouragement. It might be hunger."],
+    ['Mongo', "Mongo is chewing on a denominator. Nobody tries to stop him."],
+    ['Mongo', "Mongo sniffs the equation, sneezes, and knocks over a torch."],
+  ],
+  good: [
+    "Correct. The System is mildly surprised.",
+    "Valid move. Somewhere, a math teacher felt a disturbance in the force.",
+    "Balanced. The ceiling stays up. For now.",
+    "That checks out. The viewers are {!damn} impressed.",
+    "Both sides still equal. Physics thanks you.",
+    "Legal move. The monster looks nervous.",
+    "Step accepted. {fans} new viewers tuned in to watch a crawler do algebra. This is the future.",
+    "Nice. Mongo approves. Mongo approves of most things, but still.",
+    "Clean. Carl nods like he understood that.",
+    "Correct. Donut is pretending she knew that already.",
+  ],
+  combo: [
+    "Combo move! Two things in one step and nothing exploded.",
+    "Big step, zero mistakes. The crowd goes wild. The crowd is mostly bored gods, but still.",
+  ],
+  bad: [
+    "Oof. The crowd winces. You take {dmg} damage.",
+    "Nope. The scale tips and something heavy lands on you. {dmg} damage.",
+    "The System has logged this for the blooper reel. {dmg} damage.",
+    "Well, {!shit}. That's not it. {dmg} damage.",
+    "Math error! The trap springs. Ow. {dmg} damage.",
+    "The equation screams. That's never a good sign. {dmg} damage.",
+    "Wrong, and {fans} viewers changed the channel. {dmg} damage.",
+    "Well, {!fuck}. The monster laughed at you. {dmg} damage.",
+    "Mordecai, from somewhere: \"What the {!hell} was that?\" {dmg} damage.",
+  ],
+  shielded: "Your Sign-Flip Shield absorbs the hit. No damage. Still wrong, though.",
+  hintVoices: [
+    ['Carl', ''],
+    ['Donut', 'Listen, darling. '],
+    ['The System', 'Fine. Since you asked so nicely: '],
+  ],
+  split: "You did a lot in one step. Try splitting it into smaller steps.",
+  fracTip: "Fraction tip: get a common denominator before you add, or clear the fractions first.",
+  stall: "Nothing changed. The monster is waiting. Make a move.",
+  intervention: [
+    "System intervention. The broadcast is paused. The crawler is having a moment and our sponsors are nervous.",
+    "The System has seized your screen. This is for your own good. Mostly it's for ratings.",
+    "Mandatory tutorial initiated. Mordecai drags a whiteboard across the guild floor and sighs the sigh of a thousand crawlers.",
+  ],
+  interventionSub: "Here's a different monster of the same kind. Watch how it's taken apart, one move at a time.",
+  interventionEnd: "Tutorial complete. HP restored. Back in you go. Try not to embarrass us.",
+  declareRight: {
+    all: "All real numbers! Every number works. The monster had no idea what it was doing.",
+    none: "No solution! The monster was a lie all along. It dissolves in shame.",
+  },
+  declareWrong: "That's not what's going on here. Look again. {dmg} damage.",
+  early: "You called that before the variables even vanished. Show-off.",
+  solved: [
+    "Monster down! {name} has isolated the variable and the crowd is losing it.",
+    "Kill confirmed. The math kind. The System is proud of you. Don't tell anyone.",
+    "Solved. Donut is already telling people she helped.",
+    "Victory! Mongo does a little dance. The floor shakes.",
+  ],
+  verifyAsk: "Receipts, please. Plug your answer into the original equation. What does each side come out to?",
+  verifyGood: "Verified. Both sides match. The System loves receipts. Bonus loot incoming.",
+  verifyBad: "Those don't match what the System gets. Recheck your arithmetic, or skip it.",
+  collapseWarn: "The floor is collapsing! Finish this fight, then hit the stairs.",
+  recap: {
+    cleared: "Stairwell reached. {name} lives to crawl another day. The System is contractually required to say congratulations. Congratulations.",
+    collapse: "The floor collapsed, but you made it out with your loot. Mostly intact. The viewers loved it.",
+    quit: "Crawler retreated to the safe room. Tactical. Or scared. The System doesn't judge. The comments do.",
+    homework: "Homework monster defeated. That's one fewer problem at the kitchen table.",
+  },
+  safeRoom: [
+    "Welcome to the safe room. Nothing can hurt you here except your own thoughts.",
+    "Safe room. There's a couch, a snack machine, and a sign that says NO EXPLOSIVES. Carl is ignoring the sign.",
+    "Donut is doing her hair in the mirror. Mongo is asleep on the loot. Ready when you are.",
+    "The System reminds you that the dungeon is fun and educational. The System is required to say that.",
+  ],
+  classes: [
+    { id: 'arithmancer', name: 'Arithmancer', desc: 'Casts numbers at problems until they stop moving.' },
+    { id: 'knight', name: 'Balance Knight', desc: 'Sworn to do the same thing to both sides. Always.' },
+    { id: 'rogue', name: 'Fraction Rogue', desc: 'Sneaks past denominators and stabs them with the LCD.' },
+    { id: 'berserker', name: 'Bracket Berserker', desc: 'Smashes every parenthesis. Distributes the damage equally.' },
+  ],
+};
+
+const ITEMS = [
+  // consumables
+  { id: 'potion', name: 'Minor Healing Potion', tier: 'bronze', use: 'heal', amt: 30, desc: 'Restores 30 HP. Tastes like cough syrup and regret.' },
+  { id: 'potion2', name: 'Greater Healing Potion', tier: 'silver', use: 'heal', amt: 60, desc: 'Restores 60 HP. Now with 12% fewer side effects.' },
+  { id: 'shield', name: 'Sign-Flip Shield', tier: 'silver', use: 'shield', desc: "Blocks the damage from your next mistake. Doesn't block the shame." },
+  { id: 'crystal', name: 'Time Crystal', tier: 'gold', use: 'time', amt: 120, desc: 'Two more minutes before the floor collapses. Do not ask where the minutes come from.' },
+  // bronze
+  { id: 'eraser', name: 'Used Eraser', tier: 'bronze', desc: "Half gone. Just like the last crawler's confidence." },
+  { id: 'kobcalc', name: 'Kobold Calculator', tier: 'bronze', desc: 'Solar powered. The dungeon has no sun.' },
+  { id: 'minus', name: 'Loose Minus Sign', tier: 'bronze', desc: 'Found on the floor. Somebody out there has a very wrong answer.' },
+  { id: 'trophy', name: 'Participation Trophy', tier: 'bronze', desc: 'The System is contractually obligated to give you this.' },
+  { id: 'pencil', name: 'Pencil Nub', tier: 'bronze', desc: 'Too short to hold. Too sentimental to throw away.' },
+  { id: 'tooth', name: 'Mongo Tooth', tier: 'bronze', desc: 'He grows new ones. This one was in your boot.' },
+  { id: 'scroll', name: 'Scratch Paper Scroll', tier: 'bronze', desc: 'Covered in crossed-out work. The mark of a real mathematician.' },
+  { id: 'decimals', name: 'Bag of Decimal Points', tier: 'bronze', desc: 'They roll everywhere. You will be finding them for weeks.' },
+  // silver
+  { id: 'headshot', name: "Donut's Autographed Headshot", tier: 'silver', desc: "Signed \"To my favorite math servant.\" She means it nicely. Probably." },
+  { id: 'sock', name: "Carl's Spare Sock", tier: 'silver', desc: "Clean. Probably. Don't check." },
+  { id: 'compass', name: 'Common Denominator Compass', tier: 'silver', desc: 'Always points toward the LCD. Useless for directions.' },
+  { id: 'protractor', name: 'Protractor of Minor Menace', tier: 'silver', desc: 'Wrong unit. Very pointy.' },
+  { id: 'drink', name: 'Sponsor Energy Drink', tier: 'silver', desc: 'Brought to you by a corporation that definitely has your best interests at heart.' },
+  { id: 'hammer', name: 'Bracket Breaker', tier: 'silver', desc: 'A tiny hammer for smashing parentheses. Distribution sold separately.' },
+  // gold
+  { id: 'equals', name: 'Golden Equals Sign', tier: 'gold', desc: 'Both halves weigh exactly the same. Obviously.' },
+  { id: 'crown', name: 'Crown of the Variable King', tier: 'gold', desc: 'Fits any head. Isolates you from your problems.' },
+  { id: 'notes', name: "Mordecai's Old Notes", tier: 'gold', desc: 'Mostly doodles. One very good tip about fractions.' },
+  { id: 'graphcalc', name: 'Enchanted Graphing Calculator', tier: 'gold', desc: "It can do everything. You're still not allowed to use it." },
+  { id: 'fanclub', name: 'Fan Club Card #1', tier: 'gold', desc: "Card number one of your own fan club. You're the president. Congrats." },
+  { id: 'dynamite', name: 'Decorative Dynamite', tier: 'gold', desc: 'Carl insists it is decorative. Carl is lying.' },
+  // legendary
+  { id: 'infinite', name: 'The Infinite Solution Set', tier: 'legendary', desc: 'Contains every real number. Surprisingly heavy.' },
+  { id: 'polish', name: "Princess Donut's Tiara Polish", tier: 'legendary', desc: "She'll want this back. She'll want it back SO bad." },
+  { id: 'blade', name: 'The Balance Blade', tier: 'legendary', desc: 'Cuts exactly the same amount off both sides. Legendary for a reason.' },
+  { id: 'cert', name: 'Certificate of Algebraic Supremacy', tier: 'legendary', desc: 'Signed by the System. Framed. Slightly singed.' },
+  { id: 'chew', name: "Mongo's Favorite Chew Toy", tier: 'legendary', desc: 'It used to be a calculator. Mongo has opinions about calculators.' },
+];
+
+const ACH = [
+  { id: 'first', title: 'First Blood (Mathematically Speaking)', desc: 'Solved your first equation. The dungeon noticed.' },
+  { id: 'bothsides', title: 'Both Sides Now', desc: 'Wrote your first move under both sides.' },
+  { id: 'selffix', title: 'Self-Correcting Crawler', desc: 'Fixed a mistake without the System spelling it out.' },
+  { id: 'denom', title: 'Denominator Destroyer', desc: 'Cleared the fractions by multiplying by the LCD.' },
+  { id: 'bracket', title: 'Bracket Breaker', desc: 'Distributed away your first set of parentheses.' },
+  { id: 'none', title: 'Nothing Matters', desc: 'Found an equation with no solution.' },
+  { id: 'all', title: 'Everything, Everywhere', desc: 'Found an equation where every number works.' },
+  { id: 'early', title: 'Saw It Coming', desc: 'Called a special case before the variables vanished.' },
+  { id: 'receipts', title: 'Receipts', desc: 'Checked an answer by plugging it back in.' },
+  { id: 'directions', title: 'Asked for Directions', desc: 'Used a hint. A rare and noble act.' },
+  { id: 'tutorial', title: 'Tutorial Survivor', desc: 'Lived through a System intervention.' },
+  { id: 'flawless', title: 'Flawless Victory', desc: 'Cleared a room with zero mistakes and no big hints.' },
+  { id: 'boss', title: 'Boss Down', desc: 'Defeated a floor boss.' },
+  { id: 'sprinter', title: 'Stairwell Sprinter', desc: 'Beat the boss with time left on the clock.' },
+  { id: 'buried', title: 'Buried Alive (Briefly)', desc: 'Let the floor collapse. You got out. Mostly.' },
+  { id: 'combo', title: 'Combo Breaker', desc: 'Did two moves in one step and nailed it.' },
+  { id: 'streak5', title: 'On a Roll', desc: 'Five problems in a row with no mistakes.' },
+  { id: 'streak10', title: 'Unstoppable Math Machine', desc: 'Ten problems in a row with no mistakes.' },
+  { id: 'homework', title: 'Homework Hunter', desc: 'Beat a monster from your real homework.' },
+  { id: 'decimal', title: 'Decimal Heretic', desc: 'Used a decimal. The fraction purists are furious.' },
+  { id: 'mirror', title: 'Mirror Match', desc: 'Swapped the two sides of an equation. Totally legal.' },
+  { id: 'hoarder', title: 'Hoarder', desc: 'Collected 10 different items.' },
+  { id: 'lvl5', title: 'Level 5 Crawler', desc: 'Reached level 5.' },
+  { id: 'lvl10', title: 'Double Digits', desc: 'Reached level 10.' },
+  { id: 'viral', title: 'Viral', desc: 'Hit 1,000 followers.' },
+  { id: 'influencer', title: 'Influencer (Derogatory)', desc: 'Hit 100,000 followers.' },
+];
+
+const CODE_LABELS = {
+  oneSide: 'Wrote a move under one side only',
+  mismatch: 'Different moves on each side',
+  forgotOp: "Wrote a move but didn't apply it",
+  signOp: 'Sign error applying a move',
+  invertedOp: 'Multiplied instead of divided (or reverse)',
+  partialMul: "Didn't multiply/divide every term",
+  signMul: 'Sign error multiplying/dividing by a negative',
+  firstOnly: 'Distributed to the first term only',
+  signSlip: 'Sign error distributing a negative',
+  minusFirst: 'Minus before parentheses not applied to every term',
+  unlike: 'Combined unlike terms',
+  constOff: 'Arithmetic slip with the numbers',
+  varOff: 'Arithmetic slip with the variable terms',
+  bothOff: 'Several errors on one side',
+  valueChanged: 'Changed a side without writing a move',
+  repeatDec: 'Rounded a repeating decimal',
+  declareWrong: 'Wrong call on no solution / all real numbers',
+};
+const TYPE_LABELS = {
+  standard: 'Variables on both sides',
+  fraction: 'Fractions',
+  distribution: 'Distribution',
+  double: 'Fractions + distribution',
+  special: 'No solution / all real numbers',
+};
+
+(() => {
+const E = Engine;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const pick = (a) => a[Math.floor(Math.random() * a.length)];
+const ri = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const shuffle = (arr) => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = ri(0, i); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+/* ================= save ================= */
+const SAVE_KEY = 'crawler-algebra-save-v1';
+const freshSave = () => ({
+  v: 1, crawler: null, xp: 0, followers: 0, inv: {}, ach: {},
+  stats: { solved: 0, clean: 0, mistakes: 0, codes: {}, hints: [0, 0, 0], tutorials: 0, playSeconds: 0, bosses: 0, runs: 0, verifies: 0, byType: {}, streak: 0, bestStreak: 0, floorClears: 0 },
+  log: [], settings: { bleep: false, pin: null, theme: 'auto' },
+});
+function merge(base, over) {
+  if (!over || typeof over !== 'object' || Array.isArray(over)) return over === undefined ? base : over;
+  const out = { ...base };
+  for (const k in over) out[k] = base && typeof base[k] === 'object' && !Array.isArray(base[k]) && base[k] !== null ? merge(base[k], over[k]) : over[k];
+  return out;
+}
+let memorySave = null;
+function loadSave() {
+  try { const raw = localStorage.getItem(SAVE_KEY); if (raw) return merge(freshSave(), JSON.parse(raw)); } catch (e) {}
+  return memorySave || freshSave();
+}
+let save = loadSave();
+function persist() { memorySave = save; try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch (e) {} }
+
+function applyTheme() {
+  const t = save.settings.theme;
+  if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  else document.documentElement.removeAttribute('data-theme');
+}
+
+/* ================= text helpers ================= */
+const sw = (t) => t.replace(/\{!(\w+)\}/g, (_, w) => (save.settings.bleep ? w[0] + '✱'.repeat(w.length - 1) : w));
+function say(t, vars = {}) {
+  const all = { name: save.crawler ? save.crawler.name : 'Crawler', ...vars };
+  return sw(esc(t).replace(/\{(\w+)\}/g, (m, k) => (all[k] !== undefined ? String(all[k]) : m)));
+}
+const fmtFans = (n) => (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'K' : String(n));
+const clock = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+function levelInfo(xp) { let L = 1, need = 100, rem = xp; while (rem >= need) { rem -= need; L++; need = 100 + (L - 1) * 40; } return { L, into: rem, need }; }
+const lvl = () => levelInfo(save.xp).L;
+
+/* ================= math rendering ================= */
+function astHTML(n) {
+  switch (n.t) {
+    case 'num': return esc(n.raw);
+    case 'var': return `<i>${esc(n.n)}</i>`;
+    case 'grp': return `<span class="mp">(</span>${astHTML(n.a)}<span class="mp">)</span>`;
+    case 'neg': return `−${astHTML(n.a)}`;
+    case 'add': return `${astHTML(n.a)}<span class="bin">+</span>${astHTML(n.b)}`;
+    case 'sub': return `${astHTML(n.a)}<span class="bin">−</span>${astHTML(n.b)}`;
+    case 'mul': return n.explicit ? `${astHTML(n.a)}<span class="bin">×</span>${astHTML(n.b)}` : `${astHTML(n.a)}${astHTML(n.b)}`;
+    case 'div':
+      if (n.a.t === 'neg') return `−<span class="fr"><span class="fn">${astHTML(n.a.a)}</span><span class="fd">${astHTML(n.b)}</span></span>`;
+      return `<span class="fr"><span class="fn">${astHTML(n.a)}</span><span class="fd">${astHTML(n.b)}</span></span>`;
+  }
+  return '';
+}
+function mathHTML(raw) {
+  try { return `<span class="m">${astHTML(E.parseExpr(raw))}</span>`; } catch (e) { return `<span class="m">${esc(raw)}</span>`; }
+}
+function opHTML(raw) {
+  const s = String(raw || '').trim();
+  if (!s) return '';
+  const lead = s[0];
+  const sym = { '+': '+', '-': '−', '−': '−', '*': '×', '×': '×', '/': '÷', '÷': '÷' }[lead];
+  if (!sym) return `<span class="m">${esc(s)}</span>`;
+  try { return `<span class="m"><span class="bin">${sym}</span>${astHTML(E.parseExpr(s.slice(1)))}</span>`; } catch (e) { return `<span class="m">${esc(s)}</span>`; }
+}
+const qHTML = (x) => mathHTML(E.fmtQ(x));
+const eqRow = (L, R, cls = '') => `<div class="row eqrow ${cls}"><div class="l">${mathHTML(L)}</div><div class="mid"><b>=</b></div><div class="r">${mathHTML(R)}</div></div>`;
+const opRow = (a, b) => (a || b)
+  ? `<div class="row oprow"><div class="l">${opHTML(a)}</div><div class="mid"></div><div class="r">${opHTML(b)}</div></div>`
+  : `<div class="row oprow empty"><div class="l"></div><div class="mid"></div><div class="r"></div></div>`;
+
+/* ================= toasts + modal ================= */
+const toastQ = [];
+let toastsShown = 0;
+function toast(title, body = '') { toastQ.push([title, body]); pumpToasts(); }
+function pumpToasts() {
+  while (toastsShown < 2 && toastQ.length) {
+    const [title, body] = toastQ.shift();
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.innerHTML = `<b>${title}</b>${body ? `<span>${body}</span>` : ''}`;
+    $('#toasts').appendChild(el);
+    toastsShown++;
+    setTimeout(() => { el.remove(); toastsShown--; pumpToasts(); }, 2600);
+  }
+}
+function award(id) {
+  if (save.ach[id]) return;
+  const a = ACH.find((x) => x.id === id); if (!a) return;
+  save.ach[id] = Date.now();
+  toast(`New achievement: ${esc(a.title)}`, esc(a.desc));
+  persist();
+}
+function gainXP(n) {
+  const before = lvl(); save.xp += n; const after = lvl();
+  if (after > before) toast(`Level up! You are now level ${after}.`, 'The System grudgingly acknowledges your growth.');
+  if (after >= 5) award('lvl5');
+  if (after >= 10) award('lvl10');
+}
+function gainFans(n) {
+  save.followers = Math.max(0, save.followers + n);
+  if (save.followers >= 1000) award('viral');
+  if (save.followers >= 100000) award('influencer');
+}
+let modalOpen = false;
+function showModal(html, mount) {
+  closeModal();
+  const root = $('#modal-root');
+  root.innerHTML = `<div class="modal" role="dialog" aria-modal="true"><div class="modal-card">${html}</div></div>`;
+  modalOpen = true;
+  const card = $('.modal-card', root);
+  if (mount) mount(card);
+  const f = card.querySelector('button, input'); if (f) f.focus({ preventScroll: true });
+  return card;
+}
+function closeModal() { $('#modal-root').innerHTML = ''; modalOpen = false; }
+
+/* ================= screens ================= */
+const SCREENS = ['create', 'hub', 'run', 'hwin', 'recap', 'bag', 'parent'];
+let screen = null;
+function show(name) {
+  screen = name;
+  for (const s of SCREENS) $(`#scr-${s}`).hidden = s !== name;
+  setPad(false);
+  window.scrollTo(0, 0);
+}
+
+/* ================= keypad ================= */
+let activeInput = null;
+let padSubmit = null;
+let padVar = 'x';
+const KEYS = ['7', '8', '9', 'frac', 'back', '4', '5', '6', 'var', '×', '1', '2', '3', '(', '÷', '0', '.', '−', ')', '+', 'left', 'right', 'clear', 'next'];
+function buildPad() {
+  const g = $('#pad .pad-grid');
+  g.innerHTML = KEYS.map((k) => {
+    const label = { frac: '<span class="fr"><span class="fn">a</span><span class="fd">b</span></span>', back: '⌫', var: 'x', left: '◀', right: '▶', clear: 'Clear', next: 'Next box' }[k] || k;
+    const cls = ['frac', 'back', 'left', 'right', 'clear'].includes(k) ? 'fn' : k === 'var' ? 'var' : ['×', '÷', '+', '−', '(', ')'].includes(k) ? 'opk' : k === 'next' ? 'go' : '';
+    const aria = { frac: 'fraction bar', back: 'backspace', var: 'variable', left: 'cursor left', right: 'cursor right', clear: 'clear box', next: 'next box', '−': 'minus', '×': 'times', '÷': 'divide by', '(': 'open parenthesis', ')': 'close parenthesis', '.': 'decimal point' }[k] || k;
+    return `<button type="button" class="key ${cls}" data-k="${esc(k)}" aria-label="${esc(aria)}">${label}</button>`;
+  }).join('');
+  g.addEventListener('pointerdown', (e) => { const b = e.target.closest('.key'); if (!b) return; e.preventDefault(); padPress(b.dataset.k); });
+  g.addEventListener('click', (e) => { const b = e.target.closest('.key'); if (!b || e.detail !== 0) return; padPress(b.dataset.k); });
+}
+function setPad(on, v) {
+  $('#pad').hidden = !on;
+  if (v) padVar = v;
+  const vk = $('#pad .key.var'); if (vk) vk.textContent = padVar;
+}
+function visibleCells() { return $$(`#scr-${screen} .cell`).filter((c) => c.offsetParent !== null); }
+function focusCell(el) {
+  if (!el) return;
+  activeInput = el;
+  $$('.cell.active').forEach((c) => c.classList.remove('active'));
+  el.classList.add('active');
+  el.focus({ preventScroll: true });
+  const n = el.value.length; try { el.setSelectionRange(n, n); } catch (e) {}
+}
+function padPress(k) {
+  const el = activeInput && document.body.contains(activeInput) ? activeInput : visibleCells()[0];
+  if (k === 'next') {
+    const cells = visibleCells(); const i = cells.indexOf(el);
+    if (i >= 0 && i < cells.length - 1) focusCell(cells[i + 1]);
+    else if (padSubmit) padSubmit();
+    return;
+  }
+  if (!el) return;
+  if (document.activeElement !== el) focusCell(el);
+  let s = el.selectionStart ?? el.value.length, e = el.selectionEnd ?? s;
+  const v = el.value;
+  const ins = (t) => { el.value = v.slice(0, s) + t + v.slice(e); const p = s + t.length; el.setSelectionRange(p, p); };
+  if (k === 'back') { if (s !== e) ins(''); else if (s > 0) { el.value = v.slice(0, s - 1) + v.slice(e); el.setSelectionRange(s - 1, s - 1); } }
+  else if (k === 'left') { const p = Math.max(0, s - 1); el.setSelectionRange(p, p); }
+  else if (k === 'right') { const p = Math.min(v.length, e + 1); el.setSelectionRange(p, p); }
+  else if (k === 'clear') { el.value = ''; }
+  else if (k === 'frac') ins('/');
+  else if (k === 'var') ins(padVar);
+  else ins(k);
+  el.dispatchEvent(new Event('input', { bubbles: true }));
+}
+function wireCells(root, onInput) {
+  $$('.cell', root).forEach((c) => {
+    c.addEventListener('focus', () => { activeInput = c; $$('.cell.active').forEach((x) => x.classList.remove('active')); c.classList.add('active'); });
+    c.addEventListener('input', () => { c.classList.remove('bad'); onInput && onInput(c); });
+    c.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); padPress('next'); } });
+  });
+}
+function cellHTML(f, value, placeholder, extra = '') {
+  return `<input class="cell ${extra}" data-f="${f}" value="${esc(value || '')}" placeholder="${esc(placeholder)}" inputmode="none" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="${esc(placeholder)}">`;
+}
+function previewHTML(el) {
+  if (!el || !el.value.trim()) return '<span>Tap a box, then use the keypad. <span class="fr"><span class="fn">a</span><span class="fd">b</span></span> makes a fraction: 3/4x means ¾x.</span>';
+  const isOp = el.dataset.f === 'opL' || el.dataset.f === 'opR';
+  let ok = true;
+  try { if (isOp) E.parseOp(el.value); else E.parseExpr(el.value); } catch (e) { ok = false; }
+  if (!ok) return `<span>Still typing…</span>`;
+  return `<span>Reads as</span> ${isOp ? opHTML(el.value) : mathHTML(el.value)}`;
+}
+
+/* ================= create ================= */
+function renderCreate() {
+  show('create');
+  const root = $('#scr-create');
+  let cls = null;
+  root.innerHTML = `
+    <div class="title-card"><h1>Crawler Algebra</h1><p class="muted">A math side quest with Carl, Princess Donut, and Mongo.</p></div>
+    <div class="sys"><div class="sys-title">New crawler detected</div><p>Carl and Princess Donut have requested a math specialist for their team. Nobody else applied. Congratulations, you're hired.</p></div>
+    <label class="field"><span>Crawler name</span><input class="text-in" id="cname" maxlength="20" autocomplete="off" placeholder="What should the System call you?"></label>
+    <div class="field"><span>Pick your class</span><div class="classes">${TXT.classes.map((c) => `<button type="button" class="class-opt" data-c="${c.id}" aria-pressed="false"><strong>${esc(c.name)}</strong><span class="muted small">${esc(c.desc)}</span></button>`).join('')}</div></div>
+    <button class="btn primary block" id="cgo" disabled>Enter the dungeon</button>`;
+  const name = $('#cname', root), go = $('#cgo', root);
+  const upd = () => { go.disabled = !(name.value.trim() && cls); };
+  name.addEventListener('input', upd);
+  $$('.class-opt', root).forEach((b) => b.addEventListener('click', () => {
+    cls = b.dataset.c; $$('.class-opt', root).forEach((x) => x.setAttribute('aria-pressed', x === b)); upd();
+  }));
+  go.addEventListener('click', () => {
+    save.crawler = { name: name.value.trim(), cls, created: Date.now() };
+    persist(); renderHub(); howTo();
+  });
+}
+
+/* ================= hub ================= */
+function renderHub() {
+  show('hub');
+  const L = levelInfo(save.xp);
+  const cls = TXT.classes.find((c) => c.id === save.crawler.cls);
+  const [who, line] = pick(TXT.banter);
+  $('#scr-hub').innerHTML = `
+    <div class="crawler-head">
+      <div><h1>${esc(save.crawler.name)}</h1><div class="muted">${esc(cls ? cls.name : '')}</div></div>
+      <div class="lvl" aria-label="Level ${L.L}">${L.L}</div>
+    </div>
+    <div class="bar" style="margin-top:10px"><i style="width:${(L.into / L.need) * 100}%"></i></div>
+    <div class="stat-line"><span>${L.into} / ${L.need} XP to level ${L.L + 1}</span><span>${fmtFans(save.followers)} followers</span></div>
+    <div class="sys"><div class="sys-title">Safe room</div><p>${say(pick(TXT.safeRoom))}</p></div>
+    <div class="say"><b>${esc(who)}</b><span>${say(line)}</span></div>
+    <div class="floor-card">
+      <h2>${esc(TXT.floor1.name)}</h2>
+      <div class="muted small">${esc(TXT.floor1.unit)}</div>
+      <p style="margin-top:8px">Four rooms, an optional side quest, and a boss. The floor collapses in 15 minutes.${save.stats.floorClears ? ` Cleared ${save.stats.floorClears} time${save.stats.floorClears > 1 ? 's' : ''}.` : ''}</p>
+      <button class="btn primary block" id="go-floor">Descend to Floor 1</button>
+    </div>
+    <div class="floor-card">
+      <h2>Bring your own monster</h2>
+      <p class="muted" style="margin-top:4px">Type in a problem from your homework. The System checks every step you write. It never shows the answer.</p>
+      <button class="btn block" id="go-hw">Fight a homework problem</button>
+    </div>
+    <div class="floor-card locked">
+      <h2>Floor 2</h2>
+      <p class="muted" style="margin:4px 0 0">Opens when your teacher starts the next unit.</p>
+    </div>
+    <div class="hub-actions">
+      <button class="btn" id="go-bag">Loot and achievements</button>
+      <button class="btn" id="go-how">How to play</button>
+    </div>
+    <p style="text-align:center;margin-top:18px"><button class="linkish" id="go-parent">Parent screen</button></p>`;
+  $('#go-floor').onclick = startFloor;
+  $('#go-hw').onclick = renderHwEntry;
+  $('#go-bag').onclick = () => renderBag('loot');
+  $('#go-how').onclick = howTo;
+  $('#go-parent').onclick = () => renderParent(false);
+}
+function howTo() {
+  showModal(`
+    <h2>How to fight</h2>
+    <div class="sys"><div class="sys-title">Work it like you do on paper</div><p>Each step has two rows. The top row is your move under each side, like +4n and +4n. The bottom row is what each side becomes.</p></div>
+    <div class="board">${eqRow('-15 - 4n', '6n + 5', 'start')}${opRow('+4n', '+4n')}${eqRow('-15', '10n + 5')}</div>
+    <p style="margin-top:12px"><b>Simplify steps</b> (distributing, combining like terms) leave the move row empty.</p>
+    <p><b>Finish</b> with the variable alone, like n = −2 or −2 = n. Fractions go in lowest terms.</p>
+    <p><b>If the variables vanish,</b> tap No solution or All real numbers.</p>
+    <p><b>Hints are free.</b> Carl nudges, Donut explains, and the System tells you the move. None of them will give you the answer.</p>
+    <p><b>Three misses on one step, or 0 HP,</b> and the System steps in with a tutorial on a similar problem.</p>
+    <p><b>Better work, better loot.</b> No mistakes, no big hints, and checking your answer all upgrade the loot box.</p>
+    <button class="btn primary block" id="how-ok">Got it</button>`, (c) => { $('#how-ok', c).onclick = closeModal; });
+}
+
+/* ================= runs ================= */
+let run = null;
+function startFloor() {
+  const core = shuffle(['fraction', 'distribution', ...shuffle(['standard', 'double', 'special']).slice(0, 2)]);
+  run = {
+    mode: 'floor', time: 15 * 60, idx: 0, hp: 100, shield: false, collapsing: false,
+    bossName: pick(TXT.bosses), loot: [], solved: 0, fixed: 0, xp0: save.xp, fans0: save.followers, t0: Date.now(),
+    plan: [
+      { type: core[0] }, { type: core[1] },
+      { type: pick(['fraction', 'distribution', 'double']), side: true, quest: pick(TXT.sideQuests) },
+      { type: core[2] }, { type: core[3] },
+      { type: 'boss', boss: true },
+    ],
+  };
+  save.stats.runs++; persist();
+  show('run');
+  enterRoom();
+}
+function enterRoom() {
+  const room = run.plan[run.idx];
+  if (room.side && !room.accepted) {
+    renderRunShell();
+    showModal(`
+      <div class="sys"><div class="sys-title">Side quest: ${esc(room.quest.name)}</div><p>${say(room.quest.text)}</p></div>
+      <p class="muted">Optional. Side quests drop an extra item.</p>
+      <button class="btn primary block" id="sq-yes">Take the side quest</button>
+      <button class="btn block" id="sq-no">Skip it</button>`, (c) => {
+      $('#sq-yes', c).onclick = () => { room.accepted = true; closeModal(); startProblem(room); };
+      $('#sq-no', c).onclick = () => { room.skipped = true; closeModal(); nextRoom(); };
+    });
+    return;
+  }
+  startProblem(room);
+}
+function makeProblem(gen, type, extra = {}) {
+  const st = E.makeState(gen.L, gen.R);
+  return {
+    L: gen.L, R: gen.R, v: gen.v, type, sol: E.solveSet(st.Lv, st.Rv), st, orig: st,
+    history: [], mistakes: 0, stepMiss: 0, hintLvl: 0, stepHint: -1, maxHint: -1, hints: [0, 0, 0],
+    tutorial: false, afterMistake: false, codes: [], t0: Date.now(), done: false,
+    input: { opL: '', opR: '', resL: '', resR: '' }, fb: null, ...extra,
+  };
+}
+function startProblem(room) {
+  let gen = room.boss ? E.GEN.boss() : E.GEN[room.type]();
+  if (!gen) gen = E.GEN.standard();
+  const type = room.boss || room.type === 'special' ? E.classify(gen.L, gen.R) : room.type;
+  const p = makeProblem(gen, type);
+  if (room.boss) {
+    p.boss = true; p.bossMax = Math.max(3, E.solveSteps(gen.L, gen.R, gen.v).length + 1); p.bossHP = p.bossMax;
+    p.title = `Boss: ${run.bossName}`; p.intro = say(pick(TXT.bossIntro), { boss: run.bossName });
+  } else if (room.side) {
+    p.side = true; p.title = `Side quest: ${room.quest.name}`; p.intro = say(room.quest.text);
+  } else {
+    p.title = TXT.roomNames[room.type]; p.intro = say(pick(TXT.roomIntro[room.type]));
+  }
+  const [who, line] = pick(TXT.banter); p.banter = [who, say(line)];
+  run.problem = p;
+  renderRun(true);
+}
+
+function renderRunShell() {
+  renderHUD();
+  $('#run-body').innerHTML = '';
+}
+function renderHUD() {
+  const hp = run.hp;
+  const bag = [['potion', 'Potion'], ['potion2', 'Big potion'], ['shield', 'Shield'], ['crystal', '+2 min']]
+    .filter(([id]) => (save.inv[id] || 0) > 0 && !(id === 'crystal' && run.mode !== 'floor'))
+    .map(([id, label]) => `<button type="button" data-use="${id}">${label} ×${save.inv[id]}</button>`).join('');
+  let pips = '';
+  if (run.mode === 'floor') {
+    pips = run.plan.map((r, i) => {
+      const c = ['pip', r.side ? 'side' : '', r.boss ? 'boss' : '', i < run.idx ? (r.skipped ? 'skip' : 'done') : '', i === run.idx ? 'now' : ''].join(' ');
+      return `<span class="${c}" title="${r.boss ? 'Boss' : r.side ? 'Side quest' : 'Room'}"></span>`;
+    }).join('');
+  }
+  $('#hud').innerHTML = `
+    <div class="hud-in">
+      <div class="hud-row">
+        <div class="hpwrap">
+          <div class="hpnum"><span>HP ${hp}/100${run.shield ? ' · shielded' : ''}</span><span>Lv ${lvl()}</span></div>
+          <div class="bar hp ${hp <= 30 ? 'low' : ''}"><i style="width:${hp}%"></i></div>
+        </div>
+        <div class="fans"><b>${fmtFans(save.followers)}</b>followers</div>
+        ${run.mode === 'floor' ? `<div class="timer ${run.time <= 60 ? 'warn' : ''}" id="timer" aria-label="Time until the floor collapses">${clock(run.time)}</div>` : ''}
+      </div>
+      <div class="hud-row2">
+        <div class="pips" aria-label="Room progress">${pips || '<span class="muted small">Homework Hollow</span>'}</div>
+        <div class="bag">${bag}<button type="button" class="quit" id="quit">Leave</button></div>
+      </div>
+    </div>`;
+  $$('#hud [data-use]').forEach((b) => (b.onclick = () => useItem(b.dataset.use)));
+  $('#quit').onclick = confirmQuit;
+}
+function useItem(id) {
+  const it = ITEMS.find((i) => i.id === id);
+  if (!it || !(save.inv[id] > 0)) return;
+  if (it.use === 'heal') { if (run.hp >= 100) return toast('HP is already full.'); run.hp = Math.min(100, run.hp + it.amt); }
+  if (it.use === 'shield') { if (run.shield) return toast('Shield is already up.'); run.shield = true; }
+  if (it.use === 'time') { if (run.mode !== 'floor' || run.collapsing) return toast('Too late for that.'); run.time += it.amt; }
+  save.inv[id]--; persist();
+  toast(`Used ${esc(it.name)}`);
+  renderHUD();
+}
+function confirmQuit() {
+  showModal(`
+    <h2>Leave ${run.mode === 'floor' ? 'the floor' : 'this fight'}?</h2>
+    <p class="muted" style="margin-top:6px">You keep the loot and XP you already earned.</p>
+    <button class="btn primary block" id="q-stay">Keep fighting</button>
+    <button class="btn block" id="q-go">Leave</button>`, (c) => {
+    $('#q-stay', c).onclick = closeModal;
+    $('#q-go', c).onclick = () => { closeModal(); endRun(run.mode === 'hw' ? 'quitHw' : 'quit'); };
+  });
+}
+
+function renderRun(fresh = false) {
+  if (screen !== 'run') show('run');
+  renderHUD();
+  const p = run.problem;
+  const keepField = !fresh && activeInput ? activeInput.dataset.f : null;
+  const body = $('#run-body');
+  let html = '';
+  if (run.collapsing) html += `<div class="sys alert"><div class="sys-title">Floor collapse</div><p>${say(TXT.collapseWarn)}</p></div>`;
+  html += `<div class="sys"><div class="sys-title">${esc(p.title)}</div><p>${p.intro}</p></div>`;
+  html += `<div class="say"><b>${esc(p.banter[0])}</b><span>${p.banter[1]}</span></div>`;
+  if (p.boss) html += `<div class="boss-bar" id="bossbar"><div class="stat-line"><span>${esc(run.bossName)}</span><span>${p.bossHP}/${p.bossMax}</span></div><div class="bar"><i style="width:${(p.bossHP / p.bossMax) * 100}%"></i></div></div>`;
+  html += `<div class="board" id="board">${eqRow(p.L, p.R, 'start')}`;
+  p.history.forEach((h, i) => {
+    html += opRow(h.opL, h.opR);
+    html += eqRow(h.L, h.R, p.done && i === p.history.length - 1 && !p.declared ? 'final' : '');
+  });
+  if (!p.done) {
+    html += `<div class="entry">
+      <div class="row">${'<div class="l">' + cellHTML('opL', p.input.opL, 'move (or blank)', 'op') + '</div>'}<div class="mid"></div><div class="r">${cellHTML('opR', p.input.opR, 'move (or blank)', 'op')}</div></div>
+      <div class="row"><div class="l">${cellHTML('resL', p.input.resL, 'left side')}</div><div class="mid"><b>=</b></div><div class="r">${cellHTML('resR', p.input.resR, 'right side')}</div></div>
+    </div>`;
+  }
+  if (p.declared) html += `<div class="row eqrow final"><div class="l" style="grid-column:1/-1;text-align:center">${p.declared === 'all' ? 'All real numbers' : 'No solution'}</div></div>`;
+  html += `</div>`;
+  if (!p.done) {
+    html += `<div class="preview" id="preview"></div>`;
+    html += `<div class="fb ${p.fb ? p.fb.cls : ''}" id="fb" aria-live="polite">${p.fb ? p.fb.html : ''}</div>`;
+    html += `<div class="actions"><button class="btn primary" id="check">Check move</button><button class="btn" id="hint">Hint ${Math.min(p.hintLvl + 1, 3)} of 3</button></div>`;
+    html += `<div class="declare"><button class="btn ghost" id="d-none">No solution</button><button class="btn ghost" id="d-all">All real numbers</button></div>`;
+  } else {
+    html += victoryHTML(p);
+  }
+  body.innerHTML = html;
+
+  if (!p.done) {
+    const entry = $('.entry', body);
+    wireCells(entry, (c) => { p.input[c.dataset.f] = c.value; $('#preview').innerHTML = previewHTML(c); });
+    $$('.cell', entry).forEach((c) => c.addEventListener('focus', () => ($('#preview').innerHTML = previewHTML(c))));
+    $('#check').onclick = doCheck;
+    $('#hint').onclick = doHint;
+    $('#d-none').onclick = () => doDeclare('none');
+    $('#d-all').onclick = () => doDeclare('all');
+    padSubmit = doCheck;
+    setPad(true, p.v);
+    const target = (keepField && $(`.cell[data-f="${keepField}"]`, entry)) || (fresh || p.focusFirst ? $('.cell[data-f="opL"]', entry) : null);
+    p.focusFirst = false;
+    if (target) focusCell(target);
+    $('#preview').innerHTML = previewHTML(activeInput && document.body.contains(activeInput) ? activeInput : null);
+    if (p.bad) { const b = $(`.cell[data-f="${p.bad}"]`, entry); if (b) b.classList.add('bad'); p.bad = null; }
+  } else {
+    wireVictory(p, body);
+  }
+  if (fresh) window.scrollTo(0, 0);
+  else if (!p.done) { const fb = $('#fb'); if (fb && p.fb) { const d = $('.declare', body); (d || fb).scrollIntoView({ block: 'nearest' }); } }
+}
+
+function readInputs() { return { ...run.problem.input }; }
+function doCheck() {
+  const p = run.problem; if (p.done) return;
+  const inp = readInputs();
+  const r = E.checkStep(p.st, inp, p.v);
+  if (r.kind === 'error') { p.bad = r.where; p.fb = { cls: 'info', html: `<p>${esc(r.msg)}</p>` }; }
+  else if (r.kind === 'stall') p.fb = { cls: 'info', html: `<p>${say(TXT.stall)}</p>` };
+  else if (r.kind === 'mistake') { p.bad = r.where; onMistake(r.code, r.msg, r); }
+  else if (r.kind === 'ok') onGood(r, inp);
+  if (!p.done) renderRun();
+}
+function onMistake(code, msg, extra = {}) {
+  const p = run.problem;
+  p.mistakes++; p.stepMiss++; p.codes.push(code); p.afterMistake = true;
+  save.stats.mistakes++; save.stats.codes[code] = (save.stats.codes[code] || 0) + 1;
+  const lost = ri(5, 30) * lvl(); gainFans(-lost);
+  let dmg = p.boss ? 20 : 15, line;
+  if (run.shield) { run.shield = false; dmg = 0; line = TXT.shielded; }
+  else { run.hp = Math.max(0, run.hp - dmg); line = pick(TXT.bad); }
+  const notes = [];
+  if (extra.combo) notes.push(TXT.split);
+  if (extra.fracs) notes.push(TXT.fracTip);
+  p.fb = { cls: 'bad', html: `<p><span class="who">The System:</span> ${say(line, { dmg, fans: fmtFans(lost) })}</p><p>${esc(msg)}</p>${notes.map((n) => `<p class="small">${esc(n)}</p>`).join('')}` };
+  persist();
+  if (run.hp <= 0 || p.stepMiss >= 3) setTimeout(intervention, 650);
+}
+function onGood(r, inp) {
+  const p = run.problem;
+  p.history.push({ opL: inp.opL, opR: inp.opR, L: inp.resL, R: inp.resR });
+  p.st = r.next; p.stepMiss = 0; p.hintLvl = 0;
+  const f = r.flags;
+  if (f.wroteOp) award('bothsides');
+  if (f.cleared) award('denom');
+  if (f.distributed) award('bracket');
+  if (f.combo) award('combo');
+  if (f.decimal) award('decimal');
+  if (f.swapped) award('mirror');
+  if (p.afterMistake) { if (p.stepHint < 2) { award('selffix'); run.fixed = (run.fixed || 0) + 1; } p.afterMistake = false; }
+  p.stepHint = -1;
+  p.input = { opL: '', opR: '', resL: '', resR: '' };
+  gainXP(5);
+  const gained = ri(20, 80) * lvl(); gainFans(gained);
+  if (p.boss) {
+    p.bossHP = Math.max(r.status === 'solved' ? 0 : 1, p.bossHP - 1);
+    setTimeout(() => { const b = $('#bossbar'); if (b) b.classList.add('shake'); }, 30);
+  }
+  activeInput = null; p.focusFirst = true;
+  if (r.status === 'solved') { solve({}); return; }
+  if (r.status === 'simplify') p.fb = { cls: 'info', html: `<p>Almost. The ${p.v} is alone, but the number side isn't in simplest form yet. Reduce it and write it again with the move boxes empty.</p>` };
+  else if (r.status === 'declare') p.fb = { cls: 'info', html: `<p>The ${p.v}'s are gone. Is what's left true or false? Tap <b>No solution</b> or <b>All real numbers</b>.</p>` };
+  else {
+    const line = f.combo ? pick(TXT.combo) : pick(TXT.good);
+    p.fb = { cls: 'ok', html: `<p><span class="who">The System:</span> ${say(line, { fans: fmtFans(gained) })}</p>` };
+  }
+  persist();
+}
+function doHint() {
+  const p = run.problem; if (p.done) return;
+  const lv = Math.min(p.hintLvl, 2);
+  const m = E.nextMove(p.st, p.v);
+  const text = E.hintText(m, lv, p.v);
+  const [who, pre] = TXT.hintVoices[lv];
+  p.hints[lv]++; save.stats.hints[lv]++;
+  p.stepHint = Math.max(p.stepHint, lv); p.maxHint = Math.max(p.maxHint, lv);
+  p.hintLvl = Math.min(p.hintLvl + 1, 2);
+  award('directions');
+  p.fb = { cls: 'hint', html: `<p><span class="who">${esc(who)}:</span> ${esc(pre + text)}</p>` };
+  persist();
+  renderRun();
+}
+function doDeclare(kind) {
+  const p = run.problem; if (p.done) return;
+  const actual = E.solveSet(p.st.Lv, p.st.Rv).kind;
+  if (actual === kind) {
+    const early = !(E.Lin.isConst(p.st.Lv) && E.Lin.isConst(p.st.Rv));
+    p.declared = kind;
+    award(kind);
+    if (early) award('early');
+    solve({ declare: kind, early });
+  } else {
+    onMistake('declareWrong', "That call doesn't match this equation. Keep working it and see what's left.");
+    renderRun();
+  }
+}
+function solve(x) {
+  const p = run.problem;
+  p.done = true; p.secs = Math.round((Date.now() - p.t0) / 1000);
+  run.solved++;
+  const S = save.stats;
+  S.solved++;
+  if (p.mistakes === 0) { S.streak++; S.bestStreak = Math.max(S.bestStreak, S.streak); } else S.streak = 0;
+  const clean = p.mistakes === 0 && p.maxHint < 2;
+  if (clean) { S.clean++; award('flawless'); }
+  award('first');
+  if (S.streak >= 5) award('streak5');
+  if (S.streak >= 10) award('streak10');
+  if (run.mode === 'hw') award('homework');
+  if (p.boss) { award('boss'); S.bosses++; p.bossHP = 0; }
+  const bt = S.byType[p.type] || (S.byType[p.type] = { solved: 0, mistakes: 0, hints: 0 });
+  bt.solved++; bt.mistakes += p.mistakes; bt.hints += p.hints[0] + p.hints[1] + p.hints[2];
+  logProblem(p, 'solved');
+  const xp = 25 + (clean ? 15 : 0) + (p.boss ? 60 : 0);
+  gainXP(xp);
+  const fans = ri(100, 300) * lvl() * (p.boss ? 3 : 1);
+  gainFans(fans);
+  let text = x.declare ? TXT.declareRight[x.declare] + (x.early ? ' ' + TXT.early : '') : pick(TXT.solved);
+  p.victory = { text: say(text), xp, fans };
+  p.verify = p.sol.kind === 'one' ? { state: 'ask', L: '', R: '', msg: '' } : null;
+  p.fb = null;
+  setPad(false);
+  persist();
+  renderRun();
+}
+function logProblem(p, result) {
+  save.log.unshift({ t: Date.now(), mode: run.mode, type: p.type, L: p.L, R: p.R, mistakes: p.mistakes, hints: p.hints, tut: p.tutorial, result, secs: p.secs || Math.round((Date.now() - p.t0) / 1000), codes: p.codes });
+  save.log = save.log.slice(0, 60);
+}
+function victoryHTML(p) {
+  let h = `<div class="sys" style="border-color:var(--teal)"><div class="sys-title" style="color:var(--teal)">${p.boss ? 'Boss defeated' : 'Monster defeated'}</div><p>${p.victory.text}</p><p class="small muted" style="margin-top:6px">+${p.victory.xp} XP · +${fmtFans(p.victory.fans)} followers</p></div>`;
+  if (p.verify && (p.verify.state === 'ask')) {
+    h += `<div class="board">
+      <p style="margin:2px 4px 8px">${say(TXT.verifyAsk)}</p>
+      <p style="margin:0 4px 10px;text-align:center;font-size:21px">${mathHTML(p.v)} <span class="bin">=</span> ${qHTML(p.sol.val)}</p>
+      ${eqRow(p.L, p.R, 'start')}
+      <div class="row"><div class="l">${cellHTML('vL', p.verify.L, 'left side is…')}</div><div class="mid"><b>=</b></div><div class="r">${cellHTML('vR', p.verify.R, 'right side is…')}</div></div>
+    </div>
+    <div class="preview" id="preview"></div>
+    <div class="fb ${p.verify.msg ? 'bad' : ''}" id="fb">${p.verify.msg ? `<p>${esc(p.verify.msg)}</p>` : ''}</div>
+    <div class="actions"><button class="btn teal" id="v-check">Check receipts</button><button class="btn" id="v-skip">Skip</button></div>`;
+  } else {
+    if (p.verify && p.verify.state === 'good') h += `<div class="fb ok"><p>${say(TXT.verifyGood)}</p></div>`;
+    h += `<button class="btn primary block" id="loot" style="margin-top:12px">Open loot</button>`;
+  }
+  return h;
+}
+function wireVictory(p, body) {
+  const vc = $('#v-check', body);
+  if (vc) {
+    wireCells(body, (c) => { p.verify[c.dataset.f === 'vL' ? 'L' : 'R'] = c.value; $('#preview').innerHTML = previewHTML(c); });
+    padSubmit = checkVerify;
+    setPad(true, p.v);
+    focusCell($('.cell[data-f="vL"]', body));
+    $('#preview').innerHTML = previewHTML(null);
+    vc.onclick = checkVerify;
+    $('#v-skip', body).onclick = () => { p.verify.state = 'skipped'; setPad(false); renderRun(); };
+  }
+  const lb = $('#loot', body);
+  if (lb) { setPad(false); lb.onclick = () => openLoot(p); lb.focus({ preventScroll: true }); }
+}
+function checkVerify() {
+  const p = run.problem;
+  let a, b;
+  try { a = E.parseNumber(p.verify.L); b = E.parseNumber(p.verify.R); }
+  catch (e) { p.verify.msg = 'Type a single number in each box.'; return renderRun(); }
+  const wantL = E.evalAt(p.orig.Lv, p.v, p.sol.val), wantR = E.evalAt(p.orig.Rv, p.v, p.sol.val);
+  if (a.eq(wantL) && b.eq(wantR)) {
+    p.verify.state = 'good'; save.stats.verifies++;
+    award('receipts'); gainXP(10); persist();
+  } else {
+    p.verify.msg = TXT.verifyBad;
+    save.stats.codes.verifyWrong = (save.stats.codes.verifyWrong || 0) + 1;
+  }
+  renderRun();
+}
+
+/* ================= loot ================= */
+const TIERS = ['bronze', 'silver', 'gold', 'legendary'];
+const TIER_NAMES = { bronze: 'Bronze Box', silver: 'Silver Box', gold: 'Gold Box', legendary: 'Legendary Box' };
+function rollItem(tier) {
+  const pool = ITEMS.filter((i) => i.tier === tier);
+  const cons = pool.filter((i) => i.use), coll = pool.filter((i) => !i.use);
+  return cons.length && Math.random() < 0.35 ? pick(cons) : pick(coll.length ? coll : pool);
+}
+function openLoot(p) {
+  let pts = 0;
+  if (p.mistakes === 0) pts++;
+  if (p.maxHint < 2) pts++;
+  if ((p.verify && p.verify.state === 'good') || p.declared) pts++;
+  let ti = pts >= 3 ? 2 : pts === 2 ? 1 : 0;
+  if (p.boss) ti++;
+  const tier = TIERS[Math.min(ti, 3)];
+  const items = [rollItem(tier)];
+  if (p.side) items.push(rollItem(tier));
+  if (Math.random() < 0.25) items.push(rollItem('bronze'));
+  const isLast = run.mode === 'hw' || run.idx >= run.plan.length - 1 || run.collapsing;
+  showModal(`
+    <h2 style="text-align:center">${esc(TIER_NAMES[tier])}</h2>
+    <p class="muted small" style="text-align:center;margin-top:4px">${reasonText(p)}</p>
+    <button type="button" class="loot-box closed t-${tier}" id="box" aria-label="Open the box">Tap to open</button>
+    <div id="loot-items"></div>
+    <button class="btn primary block" id="loot-next" hidden>${isLast ? (run.mode === 'hw' ? 'Back to the safe room' : 'Head for the stairs') : 'Next room'}</button>`, (c) => {
+    const box = $('#box', c);
+    box.onclick = () => {
+      if (!box.classList.contains('closed')) return;
+      box.classList.remove('closed'); box.classList.add('pop'); box.textContent = 'Opened';
+      for (const it of items) { save.inv[it.id] = (save.inv[it.id] || 0) + 1; run.loot.push(it.id); }
+      if (ITEMS.filter((i) => !i.use && save.inv[i.id] !== undefined).length >= 10) award('hoarder');
+      persist();
+      $('#loot-items', c).innerHTML = items.map((it) => `<div class="item"><div class="tier t-${it.tier}">${esc(it.tier[0].toUpperCase() + it.tier.slice(1))}${it.use ? ' · usable' : ''}</div><h3>${esc(it.name)}</h3><div class="muted small">${sw(esc(it.desc))}</div></div>`).join('');
+      const nx = $('#loot-next', c); nx.hidden = false; nx.focus({ preventScroll: true });
+    };
+    $('#loot-next', c).onclick = nextRoom;
+  });
+}
+function reasonText(p) {
+  const bits = [];
+  bits.push(p.mistakes === 0 ? 'no mistakes' : `${p.mistakes} mistake${p.mistakes > 1 ? 's' : ''}`);
+  bits.push(p.maxHint < 2 ? 'no big hints' : 'used the big hint');
+  if (p.verify) bits.push(p.verify.state === 'good' ? 'answer checked' : 'answer not checked');
+  if (p.boss) bits.push('boss bonus');
+  if (p.side) bits.push('side quest bonus item');
+  return esc(bits.join(' · '));
+}
+function nextRoom() {
+  closeModal();
+  if (run.mode === 'hw') return endRun('homework');
+  if (run.collapsing) return endRun('collapse');
+  run.idx++;
+  if (run.idx >= run.plan.length) return endRun('cleared');
+  enterRoom();
+}
+
+/* ================= intervention ================= */
+function intervention() {
+  const p = run.problem; if (!p || p.done) return;
+  p.tutorial = true; save.stats.tutorials++; persist();
+  let ex = p.type === 'special' ? E.GEN.special(false) : (E.GEN[p.type] || E.GEN.standard)();
+  if (!ex) ex = E.GEN.standard();
+  const steps = E.solveSteps(ex.L, ex.R, ex.v);
+  let shown = 0;
+  showModal(`
+    <div class="sys alert"><div class="sys-title">System intervention</div><p>${say(pick(TXT.intervention))}</p></div>
+    <p>${esc(TXT.interventionSub)}</p>
+    <div class="worked" id="worked"></div>
+    <button class="btn primary block" id="w-next">Show the next move</button>`, (c) => {
+    const draw = () => {
+      let h = `<div class="board">${eqRow(ex.L, ex.R, 'start')}`;
+      for (let i = 0; i < shown; i++) {
+        const s = steps[i];
+        h += `<div class="why">${i + 1}. ${esc(s.why)}</div>`;
+        if (s.declare) h += `<div class="row eqrow final"><div class="l" style="grid-column:1/-1;text-align:center">${s.declare === 'all' ? 'All real numbers' : 'No solution'}</div></div>`;
+        else { h += opRow(s.op || '', s.op || ''); h += eqRow(s.L, s.R, i === steps.length - 1 ? 'final' : ''); }
+      }
+      h += '</div>';
+      $('#worked', c).innerHTML = h;
+      const btn = $('#w-next', c);
+      if (shown >= steps.length) { btn.textContent = 'Back to the fight'; }
+    };
+    draw();
+    $('#w-next', c).onclick = () => {
+      if (shown < steps.length) { shown++; draw(); $('#w-next', c).scrollIntoView({ block: 'nearest' }); return; }
+      run.hp = 100; p.stepMiss = 0;
+      p.input = { opL: '', opR: '', resL: '', resR: '' }; p.focusFirst = true; activeInput = null;
+      award('tutorial');
+      p.fb = { cls: 'info', html: `<p><span class="who">The System:</span> ${say(TXT.interventionEnd)}</p>` };
+      closeModal(); renderRun();
+    };
+  });
+}
+
+/* ================= homework mode ================= */
+let hwDraft = { L: '', R: '', v: 'x', msg: '' };
+function renderHwEntry() {
+  show('hwin');
+  const root = $('#scr-hwin');
+  const letters = ['x', 'n', 'p', 'a', 'k', 'r', 'm', 'v', 'b', 'y', 't', 'w'];
+  root.innerHTML = `
+    <h1 style="margin-top:8px">Bring your own monster</h1>
+    <p class="muted" style="margin-top:6px">Type the equation from your homework, one side per box. The System checks every step you write and never shows the answer.</p>
+    <div class="field"><span>Variable key on the keypad</span><div class="chips">${letters.map((l) => `<button type="button" class="chip" data-l="${l}" aria-pressed="${l === hwDraft.v}">${l}</button>`).join('')}</div></div>
+    <div class="board">
+      <div class="row"><div class="l">${cellHTML('resL', hwDraft.L, 'left side')}</div><div class="mid"><b>=</b></div><div class="r">${cellHTML('resR', hwDraft.R, 'right side')}</div></div>
+    </div>
+    <div class="preview" id="preview"></div>
+    <div class="fb ${hwDraft.msg ? 'info' : ''}" id="fb">${hwDraft.msg ? `<p>${esc(hwDraft.msg)}</p>` : ''}</div>
+    <div class="actions"><button class="btn primary" id="hw-go">Start the fight</button><button class="btn" id="hw-back">Back</button></div>`;
+  wireCells(root, (c) => { hwDraft[c.dataset.f === 'resL' ? 'L' : 'R'] = c.value; $('#preview', root).innerHTML = previewHTML(c); });
+  $$('.cell', root).forEach((c) => c.addEventListener('focus', () => ($('#preview', root).innerHTML = previewHTML(c))));
+  $$('.chip', root).forEach((b) => (b.onclick = () => { hwDraft.v = b.dataset.l; $$('.chip', root).forEach((x) => x.setAttribute('aria-pressed', x === b)); setPad(true, hwDraft.v); }));
+  $('#hw-go', root).onclick = startHw;
+  $('#hw-back', root).onclick = renderHub;
+  padSubmit = startHw;
+  setPad(true, hwDraft.v);
+  focusCell($('.cell', root));
+  $('#preview', root).innerHTML = previewHTML(null);
+}
+function startHw() {
+  const { L, R } = hwDraft;
+  hwDraft.msg = '';
+  let st;
+  try {
+    if (!L.trim() || !R.trim()) throw new E.MathErr('Fill in both sides of the equation.');
+    st = E.makeState(L, R);
+  } catch (e) { hwDraft.msg = e.message; return renderHwEntry(); }
+  const vars = new Set([...E.varsIn(st.Last), ...E.varsIn(st.Rast)]);
+  if (vars.size === 0) { hwDraft.msg = "There's no variable in that. The System needs something to solve for."; return renderHwEntry(); }
+  if (vars.size > 1) { hwDraft.msg = 'This floor handles one variable per monster. Multi-variable monsters unlock on a later floor.'; return renderHwEntry(); }
+  const v = [...vars][0];
+  let type;
+  try { type = E.classify(L, R); } catch (e) { hwDraft.msg = e.message; return renderHwEntry(); }
+  run = { mode: 'hw', hp: 100, shield: false, collapsing: false, loot: [], solved: 0, fixed: 0, xp0: save.xp, fans0: save.followers, t0: Date.now(), idx: 0 };
+  const p = makeProblem({ L, R, v }, type, { title: TXT.roomNames.homework, intro: say(pick(TXT.roomIntro.homework)) });
+  const [who, line] = pick(TXT.banter); p.banter = [who, say(line)];
+  run.problem = p;
+  hwDraft = { L: '', R: '', v: hwDraft.v, msg: '' };
+  show('run');
+  renderRun(true);
+}
+
+/* ================= end + recap ================= */
+function endRun(reason) {
+  const p = run.problem;
+  if (p && !p.done) logProblem(p, 'left');
+  if (reason === 'collapse') award('buried');
+  if (reason === 'cleared') { save.stats.floorClears++; if (run.time > 0) award('sprinter'); }
+  persist();
+  const R = reason === 'quitHw' ? 'quit' : reason;
+  const titles = { cleared: 'Floor cleared', collapse: 'The floor collapsed', quit: 'Back to the safe room', homework: 'Homework monster defeated' };
+  const secs = Math.round((Date.now() - run.t0) / 1000);
+  const names = run.loot.map((id) => ITEMS.find((i) => i.id === id)).filter(Boolean);
+  show('recap');
+  $('#run-body').innerHTML = ''; $('#hud').innerHTML = '';
+  $('#scr-recap').innerHTML = `
+    <h1 style="margin-top:10px">${titles[R]}</h1>
+    <div class="sys"><div class="sys-title">Broadcast summary</div><p>${say(TXT.recap[R])}</p></div>
+    <div class="kv">
+      <div><b>${run.solved}</b><span>monsters defeated</span></div>
+      <div><b>${run.fixed || 0}</b><span>mistakes fixed on your own</span></div>
+      <div><b>+${save.xp - run.xp0}</b><span>XP earned</span></div>
+      <div><b>${save.followers - run.fans0 >= 0 ? '+' : ''}${fmtFans(save.followers - run.fans0)}</b><span>followers</span></div>
+      <div><b>${names.length}</b><span>items looted</span></div>
+      <div><b>${clock(secs)}</b><span>time in the dungeon</span></div>
+    </div>
+    ${names.length ? `<h3 style="margin-top:14px">Loot</h3>${names.map((it) => `<div class="item"><div class="tier t-${it.tier}">${esc(it.tier)}</div><h3>${esc(it.name)}</h3></div>`).join('')}` : ''}
+    <button class="btn primary block" id="rc-ok" style="margin-top:14px">Back to the safe room</button>`;
+  $('#rc-ok').onclick = renderHub;
+  run = null;
+}
+
+/* ================= timer ================= */
+setInterval(() => {
+  if (document.hidden || !run || screen !== 'run') return;
+  save.stats.playSeconds++;
+  if (run.mode === 'floor' && !modalOpen && run.time > 0) {
+    run.time--;
+    const t = $('#timer');
+    if (t) { t.textContent = clock(run.time); t.classList.toggle('warn', run.time <= 60); }
+    if (run.time === 0) {
+      run.collapsing = true;
+      toast('Floor collapse!', 'Finish this fight, then get to the stairs.');
+      if (run.problem && !run.problem.done) renderRun();
+    }
+  }
+  if (save.stats.playSeconds % 15 === 0) persist();
+}, 1000);
+document.addEventListener('visibilitychange', () => { if (document.hidden) persist(); });
+
+/* ================= loot + achievements screen ================= */
+function renderBag(tab) {
+  show('bag');
+  const found = ITEMS.filter((i) => save.inv[i.id] !== undefined);
+  const cons = ITEMS.filter((i) => i.use && (save.inv[i.id] || 0) > 0);
+  const coll = found.filter((i) => !i.use);
+  const got = ACH.filter((a) => save.ach[a.id]).length;
+  $('#scr-bag').innerHTML = `
+    <h1 style="margin-top:8px">Your stash</h1>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="${tab === 'loot'}" data-t="loot">Loot</button>
+      <button role="tab" aria-selected="${tab === 'ach'}" data-t="ach">Achievements ${got}/${ACH.length}</button>
+    </div>
+    <div id="bag-body">${tab === 'loot' ? `
+      <h3>Usable items</h3>
+      <p class="muted small">Use these from the top bar during a fight.</p>
+      ${cons.length ? cons.map((it) => itemCard(it)).join('') : '<p class="muted">None right now. Clean fights drop better boxes.</p>'}
+      <h3 style="margin-top:16px">Collection · ${coll.length} of ${ITEMS.filter((i) => !i.use).length} found</h3>
+      ${coll.length ? coll.map((it) => itemCard(it)).join('') : '<p class="muted">Nothing yet. Go get some.</p>'}` : ACH.map((a) => `
+      <div class="ach ${save.ach[a.id] ? 'got' : ''}"><div class="mark">${save.ach[a.id] ? '✓' : '?'}</div><div><h3>${save.ach[a.id] ? esc(a.title) : 'Locked'}</h3><div class="muted small">${esc(a.desc)}</div></div></div>`).join('')}
+    </div>
+    <button class="btn block" id="bag-back" style="margin-top:16px">Back to the safe room</button>`;
+  $$('#scr-bag [data-t]').forEach((b) => (b.onclick = () => renderBag(b.dataset.t)));
+  $('#bag-back').onclick = renderHub;
+}
+const itemCard = (it) => `<div class="item"><div class="tier t-${it.tier}">${esc(it.tier[0].toUpperCase() + it.tier.slice(1))} · ×${save.inv[it.id] || 0}</div><h3>${esc(it.name)}</h3><div class="muted small">${sw(esc(it.desc))}</div></div>`;
+
+/* ================= parent screen ================= */
+function renderParent(unlocked) {
+  show('parent');
+  const root = $('#scr-parent');
+  if (!unlocked) {
+    const setting = !save.settings.pin;
+    root.innerHTML = `
+      <h1 style="margin-top:8px">Parent screen</h1>
+      <p class="muted" style="margin-top:6px">${setting ? 'Set a 4-digit PIN. You will need it to open this screen next time.' : 'Enter your PIN.'}</p>
+      <label class="field"><span>PIN</span><input class="text-in" id="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off"></label>
+      <div class="fb" id="pin-msg"></div>
+      <div class="actions"><button class="btn primary" id="pin-go">${setting ? 'Set PIN' : 'Unlock'}</button><button class="btn" id="pin-back">Back</button></div>`;
+    const inp = $('#pin'); inp.focus();
+    const go = () => {
+      const v = inp.value.trim();
+      if (!/^\d{4}$/.test(v)) { $('#pin-msg').className = 'fb bad'; $('#pin-msg').textContent = 'Use exactly 4 digits.'; return; }
+      if (setting) { save.settings.pin = v; persist(); renderParent(true); }
+      else if (v === save.settings.pin) renderParent(true);
+      else { $('#pin-msg').className = 'fb bad'; $('#pin-msg').textContent = "That PIN doesn't match."; inp.value = ''; }
+    };
+    $('#pin-go').onclick = go;
+    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+    $('#pin-back').onclick = renderHub;
+    return;
+  }
+  const S = save.stats;
+  const hrs = Math.floor(S.playSeconds / 3600), mins = Math.floor((S.playSeconds % 3600) / 60);
+  const types = Object.keys(TYPE_LABELS).filter((t) => S.byType[t]);
+  const codes = Object.entries(S.codes).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const hintTotal = S.hints[0] + S.hints[1] + S.hints[2];
+  root.innerHTML = `
+    <h1 style="margin-top:8px">Parent screen</h1>
+    <p class="muted" style="margin-top:4px">${esc(save.crawler ? save.crawler.name : '')} · level ${lvl()} · best streak ${S.bestStreak}</p>
+    <div class="kv">
+      <div><b>${hrs ? hrs + 'h ' : ''}${mins}m</b><span>time played</span></div>
+      <div><b>${S.solved}</b><span>problems solved</span></div>
+      <div><b>${S.solved ? Math.round((S.clean / S.solved) * 100) : 0}%</b><span>solved with no mistakes and no big hints</span></div>
+      <div><b>${S.tutorials}</b><span>System interventions (got stuck)</span></div>
+      <div><b>${hintTotal}</b><span>hints: ${S.hints[0]} nudge · ${S.hints[1]} explain · ${S.hints[2]} exact move</span></div>
+      <div><b>${S.verifies}</b><span>answers checked by plugging back in</span></div>
+    </div>
+    <div class="section"><h2>By problem type</h2>
+      ${types.length ? `<div class="tbl-wrap"><table><thead><tr><th>Type</th><th class="num">Solved</th><th class="num">Mistakes per problem</th><th class="num">Hints per problem</th></tr></thead><tbody>
+      ${types.map((t) => { const b = S.byType[t]; return `<tr><td>${esc(TYPE_LABELS[t])}</td><td class="num">${b.solved}</td><td class="num">${(b.mistakes / b.solved).toFixed(1)}</td><td class="num">${(b.hints / b.solved).toFixed(1)}</td></tr>`; }).join('')}
+      </tbody></table></div>` : '<p class="muted">No problems solved yet.</p>'}
+    </div>
+    <div class="section"><h2>Most common mistakes</h2>
+      ${codes.length ? `<div class="tbl-wrap"><table><tbody>${codes.map(([c, n]) => `<tr><td>${esc(CODE_LABELS[c] || c)}</td><td class="num">${n}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted">None recorded yet.</p>'}
+    </div>
+    <div class="section"><h2>Recent problems</h2>
+      ${save.log.length ? save.log.slice(0, 20).map((l) => {
+        const hints = l.hints[0] + l.hints[1] + l.hints[2];
+        const meta = [
+          new Date(l.t).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }),
+          l.mode === 'hw' ? 'homework' : TYPE_LABELS[l.type] || l.type,
+          l.result === 'solved' ? `solved in ${clock(l.secs)}` : 'left unfinished',
+          `${l.mistakes} mistake${l.mistakes === 1 ? '' : 's'}`,
+          `${hints} hint${hints === 1 ? '' : 's'}`,
+        ];
+        if (l.tut) meta.push('needed an intervention');
+        const what = (l.codes || []).map((c) => CODE_LABELS[c]).filter(Boolean);
+        return `<div class="logrow"><div class="logeq">${mathHTML(l.L)}<span class="bin">=</span>${mathHTML(l.R)}</div><div class="muted small">${esc(meta.join(', '))}</div>${what.length ? `<div class="small" style="color:var(--rose)">${esc([...new Set(what)].join('; '))}</div>` : ''}</div>`;
+      }).join('') : '<p class="muted">Nothing yet.</p>'}
+    </div>
+    <div class="section"><h2>Settings</h2>
+      <label class="toggle"><span>Bleep the swearing<br><span class="muted small">Book-level language is on by default.</span></span><input type="checkbox" id="set-bleep" ${save.settings.bleep ? 'checked' : ''}></label>
+      <label class="toggle"><span>Theme</span><select id="set-theme" class="text-in" style="width:auto;min-height:40px">${['auto', 'dark', 'light'].map((t) => `<option value="${t}" ${save.settings.theme === t ? 'selected' : ''}>${t[0].toUpperCase() + t.slice(1)}</option>`).join('')}</select></label>
+      <div class="toggle"><span>Change PIN</span><button class="btn" id="set-pin">Change</button></div>
+    </div>
+    <div class="section"><h2>Backup</h2>
+      <p class="muted small">Progress is saved on this device. Copy the save code to keep a backup or move it to another device.</p>
+      <textarea class="text-in" id="save-code" readonly></textarea>
+      <div class="actions"><button class="btn" id="copy-code">Copy save code</button><button class="btn" id="restore">Restore from code</button></div>
+    </div>
+    <div class="section"><h2>Start over</h2>
+      <p class="muted small">Erases the crawler, loot, achievements, and stats on this device.</p>
+      <button class="btn block" id="reset" style="border-color:var(--rose);color:var(--rose)">Reset all progress</button>
+    </div>
+    <button class="btn primary block" id="p-done" style="margin-top:20px">Lock and go back</button>`;
+  const code = btoa(unescape(encodeURIComponent(JSON.stringify(save))));
+  $('#save-code').value = code;
+  $('#set-bleep').onchange = (e) => { save.settings.bleep = e.target.checked; persist(); };
+  $('#set-theme').onchange = (e) => { save.settings.theme = e.target.value; persist(); applyTheme(); };
+  $('#set-pin').onclick = () => { save.settings.pin = null; persist(); renderParent(false); };
+  $('#copy-code').onclick = async () => {
+    try { await navigator.clipboard.writeText(code); toast('Save code copied'); }
+    catch (e) { const t = $('#save-code'); t.focus(); t.select(); toast('Select all and copy the code'); }
+  };
+  $('#restore').onclick = () => showModal(`
+    <h2>Restore from code</h2>
+    <p class="muted" style="margin-top:6px">This replaces everything on this device.</p>
+    <textarea class="text-in" id="r-code" placeholder="Paste the save code"></textarea>
+    <div class="fb" id="r-msg"></div>
+    <button class="btn primary block" id="r-go" style="margin-top:10px">Restore</button>
+    <button class="btn block" id="r-cancel">Cancel</button>`, (c) => {
+    $('#r-cancel', c).onclick = closeModal;
+    $('#r-go', c).onclick = () => {
+      try {
+        const data = JSON.parse(decodeURIComponent(escape(atob($('#r-code', c).value.trim()))));
+        if (!data || data.v !== 1) throw new Error();
+        save = merge(freshSave(), data); persist(); applyTheme(); closeModal(); toast('Save restored'); renderParent(true);
+      } catch (e) { $('#r-msg', c).className = 'fb bad'; $('#r-msg', c).textContent = "That code didn't work. Check that the whole code was pasted."; }
+    };
+  });
+  $('#reset').onclick = () => showModal(`
+    <h2>Reset all progress?</h2>
+    <p class="muted" style="margin-top:6px">This can't be undone unless you saved a backup code.</p>
+    <button class="btn block" id="x-go" style="border-color:var(--rose);color:var(--rose)">Reset everything</button>
+    <button class="btn primary block" id="x-no">Keep progress</button>`, (c) => {
+    $('#x-no', c).onclick = closeModal;
+    $('#x-go', c).onclick = () => { save = freshSave(); persist(); applyTheme(); closeModal(); renderCreate(); };
+  });
+  $('#p-done').onclick = renderHub;
+}
+
+
+/* ================= boot ================= */
+function boot() {
+  applyTheme();
+  buildPad();
+  if (!save.crawler) renderCreate(); else renderHub();
+}
+boot();
+})();
+
+</script>
+</body>
+</html>
